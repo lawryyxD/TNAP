@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">TNAP</string>
     <string name="splash_description">TheNeighbourHoodApp Logo</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_username">Username</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_register">Register</string>
+    <string name="action_sign_in">Sign in</string>
+    <string name="action_sign_up">Sign up</string>
 </resources>
