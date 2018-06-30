@@ -20,15 +20,18 @@
         </activity>
         <activity
             android:name=".LoginActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar">
-        </activity>
-        <activity android:name=".RegisterActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
+        <activity
+            android:name=".RegisterActivity"
             android:label="@string/app_name">
             android:parentActivityName=".LoginActivity">
-            <meta-data android:name="android.support.PARENT_ACTIVITY"
-                android:value="neighbourhoodapp.tnap.com.tnap.LoginActivity"/>
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="neighbourhoodapp.tnap.com.tnap.LoginActivity" />
         </activity>
-        <activity android:name=".HomeActivity"></activity>
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/title_activity_main"></activity>
     </application>
 
 </manifest>

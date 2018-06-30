@@ -12,4 +12,9 @@
     <string name="error_invalid_password">Password too short or does not match</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_events">Events</string>
+    <string name="title_requests">Requests</string>
+    <string name="title_profile">Profile</string>
 </resources>

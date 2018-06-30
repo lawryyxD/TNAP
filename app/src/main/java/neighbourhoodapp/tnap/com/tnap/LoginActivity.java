@@ -81,7 +81,7 @@ public class LoginActivity extends AppCompatActivity {
                     Log.d("TNAP", "Problem signing in: " + task.getException());
                     showErrorDialog("There was a problem signing in.");
                 } else {
-                    Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     finish();
                     startActivity(intent);
                 }
