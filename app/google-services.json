@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "901715829415",
+    "firebase_url": "https://neighbourhoodapp-d1482.firebaseio.com",
+    "project_id": "neighbourhoodapp-d1482",
+    "storage_bucket": "neighbourhoodapp-d1482.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:901715829415:android:052c602ce4880faf",
+        "android_client_info": {
+          "package_name": "neighbourhoodapp.tnap.com.tnap"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "901715829415-jbdpt22v3qvdf6dp3nqbtms5fhpr2ee7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB80xUPoBQVO9w1kqJvyKi9ibgTkEy9u2k"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
