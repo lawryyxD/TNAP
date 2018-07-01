@@ -3,9 +3,11 @@ package neighbourhoodapp.tnap.com.tnap;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -19,9 +21,7 @@ import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView mTextMessage;
-    private FirebaseFirestore mDatabase;
-    private Map<String, Object> userDetails;
+    private Bundle emailBundle; // to access user details among fragments
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -30,16 +30,28 @@ public class MainActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    mTextMessage.setText(R.string.title_home);
+                    MainFragment mainFrag = new MainFragment();
+                    mainFrag.setArguments(emailBundle);
+                    getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.fragment_container, mainFrag).commit();
                     return true;
                 case R.id.navigation_events:
-                    mTextMessage.setText(R.string.title_events);
+                    EventsFragment eventsFrag = new EventsFragment();
+                    eventsFrag.setArguments(emailBundle);
+                    getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.fragment_container, eventsFrag).commit();
                     return true;
                 case R.id.navigation_requests:
-                    mTextMessage.setText(R.string.title_requests);
+                    RequestsFragment requestFrag = new RequestsFragment();
+                    requestFrag.setArguments(emailBundle);
+                    getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.fragment_container, requestFrag).commit();
                     return true;
                 case R.id.navigation_profile:
-                    mTextMessage.setText(R.string.title_profile);
+                    ProfileFragment profileFrag = new ProfileFragment();
+                    profileFrag.setArguments(emailBundle);
+                    getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.fragment_container, profileFrag).commit();
                     return true;
             }
             return false;
@@ -47,36 +59,23 @@ public class MainActivity extends AppCompatActivity {
     };
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mTextMessage = (TextView) findViewById(R.id.message);
+        emailBundle = getIntent().getExtras();
 
-        mDatabase = FirebaseFirestore.getInstance();
-        String email = getIntent().getStringExtra("email");
-        DocumentReference docRef = mDatabase.collection("users").document(email);
-        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot document = task.getResult();
-                    if (document.exists()) {
-                        userDetails = document.getData();
-                        String cc = (String) userDetails.get("cc");
-                        mTextMessage.setText(cc);
-                        Log.d("TNAP", "User data retrieved from Firestore");
-                    } else {
-                        Log.d("TNAP", "No such user");
-                    }
-                } else {
-                    Log.d("TNAP", "Failed to retrieve user with error: ", task.getException());
-                }
-            }
-        });
+        // restored from prev state, don't need to do anything
+        if (savedInstanceState != null) return;
+
+        MainFragment mainFrag = new MainFragment();
+        mainFrag.setArguments(emailBundle);
+        getSupportFragmentManager().beginTransaction()
+                .add(R.id.fragment_container, mainFrag).commit();
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
     }
 
 }
