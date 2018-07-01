@@ -65,7 +65,7 @@ public class LoginActivity extends AppCompatActivity {
     // TODO: Complete the attemptLogin() method
     private void attemptLogin() {
 
-        String email = mEmailView.getText().toString();
+        final String email = mEmailView.getText().toString();
         String password = mPasswordView.getText().toString();
 
         if (email.equals("") || password.equals("")) return;
@@ -82,6 +82,7 @@ public class LoginActivity extends AppCompatActivity {
                     showErrorDialog("There was a problem signing in.");
                 } else {
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    intent.putExtra("email", email);
                     finish();
                     startActivity(intent);
                 }
