@@ -2,7 +2,7 @@
     <string name="app_name">TNAP</string>
     <string name="splash_description">TheNeighbourHoodApp Logo</string>
     <string name="prompt_email">Email</string>
-    <string name="prompt_username">Username</string>
+    <string name="prompt_username">Full Name</string>
     <string name="prompt_password">Password</string>
     <string name="prompt_password_again">Confirm Password</string>
     <string name="action_register">Register</string>
@@ -18,7 +18,6 @@
     <string name="title_requests">Requests</string>
     <string name="title_profile">Profile</string>
 
-    <string name="prompt_name">Full Name</string>
     <string name="prompt_nric">NRIC</string>
     <string name="prompt_gender">Gender</string>
     <string name="prompt_birthday">Birth Date</string>

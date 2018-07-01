@@ -19,6 +19,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -32,13 +34,20 @@ public class RegisterActivity extends AppCompatActivity {
     // TODO: Add member variables here:
     // UI references.
     private AutoCompleteTextView mEmailView;
-    private AutoCompleteTextView mUsernameView;
     private EditText mPasswordView;
     private EditText mConfirmPasswordView;
 
+    private AutoCompleteTextView mUsernameView;
+    private AutoCompleteTextView mNRICView;
+    private AutoCompleteTextView mGenderView;
+    private AutoCompleteTextView mBirthdateView;
+    private AutoCompleteTextView mPhoneNumView;
+    private AutoCompleteTextView mAddressView;
+    private AutoCompleteTextView mCCView;
+
     // Firebase instance variables
     private FirebaseAuth mAuth;
-    private FirebaseFirestore db;
+    private FirebaseFirestore mDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,9 +57,14 @@ public class RegisterActivity extends AppCompatActivity {
         mEmailView = (AutoCompleteTextView) findViewById(R.id.register_email);
         mPasswordView = (EditText) findViewById(R.id.register_password);
         mConfirmPasswordView = (EditText) findViewById(R.id.register_confirm_password);
-        mUsernameView = (AutoCompleteTextView) findViewById(R.id.register_username);
 
-        db = FirebaseFirestore.getInstance();
+        mUsernameView = (AutoCompleteTextView) findViewById(R.id.register_username);
+        mNRICView = (AutoCompleteTextView) findViewById(R.id.register_nric);
+        mGenderView = (AutoCompleteTextView) findViewById(R.id.register_gender);
+        mBirthdateView = (AutoCompleteTextView) findViewById(R.id.register_birthday);
+        mPhoneNumView = (AutoCompleteTextView) findViewById(R.id.register_phone);
+        mAddressView = (AutoCompleteTextView) findViewById(R.id.register_address);
+        mCCView = (AutoCompleteTextView) findViewById(R.id.register_cc);
 
         // Keyboard sign in action
         mConfirmPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -66,7 +80,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         // TODO: Get hold of an instance of FirebaseAuth
         mAuth = FirebaseAuth.getInstance();
-
+        mDatabase = FirebaseFirestore.getInstance();
     }
 
     // Executed when Sign Up button is pressed.
@@ -133,10 +147,35 @@ public class RegisterActivity extends AppCompatActivity {
         String password = mPasswordView.getText().toString();
 
         String username = mUsernameView.getText().toString();
+        String nric = mNRICView.getText().toString();
+        String gender = mGenderView.getText().toString();
+        String birthdate = mBirthdateView.getText().toString();
+        String phone = mPhoneNumView.getText().toString();
+        String address = mAddressView.getText().toString();
+        String cc = mCCView.getText().toString();
+
         Map<String, Object> newUser = new HashMap<>();
         newUser.put("email", email);
         newUser.put("username", username);
-        db.collection("users").add(newUser);
+        newUser.put("nric", nric);
+        newUser.put("gender", gender);
+        newUser.put("birthdate", birthdate);
+        newUser.put("phone", phone);
+        newUser.put("address", address);
+        newUser.put("cc", cc);
+        mDatabase.collection("users").document(email).set(newUser)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d("TNAP", "DocumentSnapshot of new user successfully written!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w("TNAP", "Error writing document of new user", e);
+                    }
+                });
 
         mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
