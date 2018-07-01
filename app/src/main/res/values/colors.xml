@@ -12,4 +12,6 @@
     <color name="red">#D32F2F</color>
     <color name="green">#00796B</color>
     <color name="yellow">#FFC107</color>
+    <color name="black">#000000</color>
+    <color name="instagram_blue">#044b77</color>
 </resources>

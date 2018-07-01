@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">TNAP</string>
+    <string name="full_app_name">The<b>Neighbourhood</b>App</string>
     <string name="splash_description">TheNeighbourHoodApp Logo</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_username">Full Name</string>
@@ -26,6 +27,7 @@
     <string name="prompt_cc">Community Centre</string>
 
     <string name="edit_profile">Edit Profile</string>
+    <string name="search_bar_text">Search</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_main_fragment">Loading your CC...</string>

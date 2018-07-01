@@ -1,14 +1,22 @@
 package neighbourhoodapp.tnap.com.tnap;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.SpannableStringBuilder;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -27,6 +35,8 @@ public class MainFragment extends Fragment {
     // Firebase stuff.
     private FirebaseFirestore mDatabase;
     private Map<String, Object> userDetails;
+    private Button mRequestsButton;
+    private BottomNavigationView navigationView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -64,6 +74,24 @@ public class MainFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_main, container, false);
+        View view = inflater.inflate(R.layout.fragment_main, container, false);
+        mRequestsButton = view.findViewById(R.id.main_requests_button);
+
+
+        mRequestsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                RequestsFragment NAME = new RequestsFragment();
+                fragmentTransaction.replace(R.id.fragment_container, NAME);
+                fragmentTransaction.commit();
+
+                navigationView = getActivity().findViewById(R.id.navigation);
+                navigationView.getMenu().getItem(2).setChecked(true);
+            }
+        });
+
+        return view;
     }
 }

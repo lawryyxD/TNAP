@@ -3,13 +3,85 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/icons"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".MainFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/title_bar"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:gravity="center"
+
+            android:background="@color/instagram_blue"
+            android:text="@string/full_app_name"
+            android:textColor="@color/icons"
+            android:textStyle="bold"
+            android:textSize="15sp"
+
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            />
+
+    <SearchView
+        android:id="@+id/search_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/accent"
+
+        android:queryHint="@string/search_bar_text"
+
+        app:layout_constraintTop_toBottomOf="@id/title_bar"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        />
+
+        <ImageView
+            android:id="@+id/cc_banner"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:scaleType="fitStart"
+            app:layout_constraintTop_toBottomOf="@id/search_view"
+            android:src="@drawable/main_banner"/>
+
+    <TextView
+        android:id="@+id/main_cc"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        app:layout_constraintTop_toBottomOf="@id/cc_banner"
+
         android:text="@string/hello_main_fragment"
-        android:id="@+id/main_cc" />
+        android:textColor="@color/black"
+        />
+
+        <Button
+            android:id="@+id/main_requests_button"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            style="?android:attr/borderlessButtonStyle"
+            app:layout_constraintTop_toBottomOf="@id/cc_banner"
+            android:background="@color/icons"
+            android:text="@string/title_requests"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="25sp"
+            android:gravity="left|center_vertical"
+            android:paddingTop="10dp"
+            android:paddingLeft="15dp"
+            />
+    </android.support.constraint.ConstraintLayout>
+
+</ScrollView>
 
 </FrameLayout>
