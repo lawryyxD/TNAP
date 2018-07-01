@@ -1,6 +1,7 @@
 package neighbourhoodapp.tnap.com.tnap;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -9,6 +10,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -25,6 +28,7 @@ public class ProfileFragment extends Fragment {
     private TextView mProfileName;
     private TextView mProfileGender;
     private TextView mProfileAddress;
+    private Button mEditProfileButton;
 
     // Firebase stuff.
     private FirebaseFirestore mDatabase;
@@ -71,6 +75,18 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile, container, false);
+
+        View view = inflater.inflate(R.layout.fragment_profile, container, false);
+        mEditProfileButton = view.findViewById(R.id.edit_profile_button);
+
+        mEditProfileButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity() ,EditProfileActivity.class);
+                startActivity(intent);
+            }
+        });
+        return view;
     }
+
 }
