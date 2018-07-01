@@ -17,4 +17,12 @@
     <string name="title_events">Events</string>
     <string name="title_requests">Requests</string>
     <string name="title_profile">Profile</string>
+
+    <string name="prompt_name">Full Name</string>
+    <string name="prompt_nric">NRIC</string>
+    <string name="prompt_gender">Gender</string>
+    <string name="prompt_birthday">Birth Date</string>
+    <string name="prompt_phone">Phone Number</string>
+    <string name="prompt_address">Home Address</string>
+    <string name="prompt_cc">Community Centre</string>
 </resources>
