@@ -31,6 +31,8 @@
 
     <string name="action_save_profile">Save Profile</string>
 
+    <string name="action_call_cc">Contact Us</string>
+
     <string-array name="gender_array">
         <item>Gender</item>
         <item>Male</item>
@@ -44,7 +46,6 @@
         <item>NUS Business</item>
     </string-array>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_main_fragment">Loading your CC...</string>
     <string name="hello_events_fragment">Hello events fragment</string>
     <string name="hello_profile_fragment">Loading your profile...</string>

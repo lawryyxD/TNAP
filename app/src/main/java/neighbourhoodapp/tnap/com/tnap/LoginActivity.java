@@ -21,7 +21,6 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginActivity extends AppCompatActivity {
 
-    // TODO: Add member variables here:
     private FirebaseAuth mAuth;
     // UI references.
     private AutoCompleteTextView mEmailView;
@@ -46,7 +45,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        // TODO: Grab an instance of FirebaseAuth
         mAuth = FirebaseAuth.getInstance();
 
     }
@@ -62,7 +60,6 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    // TODO: Complete the attemptLogin() method
     private void attemptLogin() {
 
         final String email = mEmailView.getText().toString();
@@ -71,7 +68,6 @@ public class LoginActivity extends AppCompatActivity {
         if (email.equals("") || password.equals("")) return;
         Toast.makeText(this, "Login in progress...", Toast.LENGTH_SHORT).show();
 
-        // TODO: Use FirebaseAuth to sign in with email & password
         mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {

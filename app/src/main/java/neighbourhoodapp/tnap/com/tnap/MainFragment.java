@@ -1,6 +1,7 @@
 package neighbourhoodapp.tnap.com.tnap;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
@@ -17,6 +18,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -30,6 +32,7 @@ import java.util.Map;
 
 public class MainFragment extends Fragment {
 
+    private ImageView mCCBanner;
     private TextView mMainCC;
     private Button mRequestsButton;
     private BottomNavigationView navigationView;
@@ -54,9 +57,31 @@ public class MainFragment extends Fragment {
                         // successfully loaded user info from database
                         userDetails = document.getData();
 
-                        // show CC name
-                        mMainCC = (TextView) getView().findViewById(R.id.main_cc); // should put under onViewCreated()
-                        mMainCC.setText((String) userDetails.get("cc"));
+                        final String userCC = (String) userDetails.get("cc");
+                        // update CC banner
+                        switch (userCC) {
+                            case "Computing CC":
+                                mCCBanner.setImageResource(R.drawable.cc_banner_computing);
+                                break;
+                            case "Business CC":
+                                mCCBanner.setImageResource(R.drawable.cc_banner_business);
+                                break;
+                            default:
+                                mCCBanner.setImageResource(R.drawable.cc_banner_senja);
+                        }
+
+                        // allow clicking
+                        mCCBanner.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Intent intent = new Intent(getActivity(), CCInfoActivity.class);
+                                intent.putExtra("cc", userCC);
+                                startActivity(intent);
+                            }
+                        });
+
+                        // update CC text
+                        mMainCC.setText(userCC);
 
                         Log.d("TNAP", "User data retrieved from Firestore");
                     } else {
@@ -76,6 +101,8 @@ public class MainFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_main, container, false);
         mRequestsButton = view.findViewById(R.id.main_requests_button);
+        mCCBanner = (ImageView) view.findViewById(R.id.cc_banner);
+        mMainCC = (TextView) view.findViewById(R.id.main_cc);
 
         mRequestsButton.setOnClickListener(new View.OnClickListener() {
             @Override

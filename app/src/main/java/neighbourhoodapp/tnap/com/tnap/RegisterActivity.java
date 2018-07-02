@@ -36,7 +36,6 @@ import java.util.Map;
 
 public class RegisterActivity extends AppCompatActivity implements OnItemSelectedListener{
 
-    // TODO: Add member variables here:
     // UI references.
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
@@ -146,7 +145,6 @@ public class RegisterActivity extends AppCompatActivity implements OnItemSelecte
             // form field with an error.
             focusView.requestFocus();
         } else {
-            // TODO: Call create FirebaseUser() here
             createFirebaseUser();
         }
     }
@@ -157,17 +155,36 @@ public class RegisterActivity extends AppCompatActivity implements OnItemSelecte
     }
 
     private boolean isPasswordValid(String password) {
-        //TODO: Add own logic to check for a valid password (minimum 6 characters)
+        // TODO: Add own logic to check for a valid password (minimum 6 characters) + validity checks for NRIC etc.
         String confirmPassword = mConfirmPasswordView.getText().toString();
         return confirmPassword.equals(password) && password.length() > 4;
     }
 
-    // TODO: Create a Firebase user
     private void createFirebaseUser() {
 
         String email = mEmailView.getText().toString();
         String password = mPasswordView.getText().toString();
 
+        mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                Log.d("TNAP", "createUser onComplete: " + task.isSuccessful());
+
+                if (!task.isSuccessful()) {
+                    Log.d("TNAP", "user creation failed");
+                    showErrorDialog("Registration attempt failed");
+                } else {
+                    addUserToDatabase(); // only add to database if account successfully created
+                    Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                    finish();
+                    startActivity(intent);
+                }
+            }
+        });
+    }
+
+    private void addUserToDatabase() {
+        String email = mEmailView.getText().toString();
         String username = mUsernameView.getText().toString();
         String nric = mNRICView.getText().toString();
         String gender = mGenderView.getText().toString();
@@ -186,6 +203,7 @@ public class RegisterActivity extends AppCompatActivity implements OnItemSelecte
         newUser.put("address", address);
         newUser.put("cc", cc);
         newUser.put("admin", 0);
+
         mDatabase.collection("users").document(email).set(newUser)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
@@ -199,22 +217,6 @@ public class RegisterActivity extends AppCompatActivity implements OnItemSelecte
                         Log.w("TNAP", "Error writing document of new user", e);
                     }
                 });
-
-        mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                Log.d("TNAP", "createUser onComplete: " + task.isSuccessful());
-
-                if (!task.isSuccessful()) {
-                    Log.d("TNAP", "user creation failed");
-                    showErrorDialog("Registration attempt failed");
-                } else {
-                    Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-                    finish();
-                    startActivity(intent);
-                }
-            }
-        });
     }
 
 

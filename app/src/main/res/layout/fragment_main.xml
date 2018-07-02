@@ -7,7 +7,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".MainFragment">
 
-    <!-- TODO: Update blank fragment layout -->
 <ScrollView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -53,7 +52,7 @@
             android:layout_height="200dp"
             android:scaleType="fitStart"
             app:layout_constraintTop_toBottomOf="@id/search_view"
-            android:src="@drawable/cc_banner_senja"/>
+            android:src="@drawable/cc_loading"/>
 
     <TextView
         android:id="@+id/main_cc"
