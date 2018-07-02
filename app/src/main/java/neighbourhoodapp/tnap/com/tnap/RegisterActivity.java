@@ -14,9 +14,14 @@ import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -29,7 +34,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 import java.util.Map;
 
-public class RegisterActivity extends AppCompatActivity {
+public class RegisterActivity extends AppCompatActivity implements OnItemSelectedListener{
 
     // TODO: Add member variables here:
     // UI references.
@@ -78,9 +83,26 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
-        // TODO: Get hold of an instance of FirebaseAuth
+        // Get hold of an instance of FirebaseAuth
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseFirestore.getInstance();
+
+        // Initiate drop-down menus
+        // Gender drop-down spinner
+        Spinner gender = findViewById(R.id.gender_dropdown);
+        ArrayAdapter<CharSequence> gender_adapter = ArrayAdapter.createFromResource(this, R.array.gender_array, R.layout.spinner_item);
+        gender_adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
+        gender.setAdapter(gender_adapter);
+        gender.setOnItemSelectedListener(this);
+
+        // Initiate drop-down menus
+        // Community Centre drop-down
+        Spinner communitycentre = findViewById(R.id.cc_dropdown);
+        ArrayAdapter<CharSequence> communitycentre_adapter = ArrayAdapter.createFromResource(this, R.array.cc_array, R.layout.spinner_item);
+        communitycentre_adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
+        communitycentre.setAdapter(communitycentre_adapter);
+        communitycentre.setOnItemSelectedListener(this);
+
     }
 
     // Executed when Sign Up button is pressed.
@@ -214,4 +236,14 @@ public class RegisterActivity extends AppCompatActivity {
         return true;
     }
 
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        String text = parent.getItemAtPosition(position).toString();
+        //Toast.makeText(parent.getContext(), text, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
 }
