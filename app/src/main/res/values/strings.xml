@@ -29,6 +29,8 @@
     <string name="edit_profile">Edit Profile</string>
     <string name="search_bar_text">Search</string>
 
+    <string name="action_save_profile">Save Profile</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_main_fragment">Loading your CC...</string>
     <string name="hello_events_fragment">Hello events fragment</string>

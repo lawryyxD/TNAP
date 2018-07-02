@@ -6,4 +6,176 @@
     android:layout_height="match_parent"
     tools:context=".EditProfileActivity">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="100dp"
+        app:layout_constraintBottom_toTopOf="@id/profile_save_button"
+        app:layout_constraintTop_toTopOf="parent"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top"
+            android:orientation="vertical"
+            tools:context="nap.orbital2018.com.tnap.EditProfileActivity">
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:textColorHint="@color/accent">
+
+                <AutoCompleteTextView
+                    android:id="@+id/update_username"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/prompt_username"
+                    android:imeOptions="actionNext"
+                    android:inputType="textNoSuggestions"
+                    android:maxLines="1"
+                    android:textColor="@color/accent"
+                    android:textColorHint="@color/accent"
+                    android:textIsSelectable="false"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:textColorHint="@color/accent">
+
+                <AutoCompleteTextView
+                    android:id="@+id/update_gender"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/prompt_gender"
+                    android:imeOptions="actionNext"
+                    android:inputType="textNoSuggestions"
+                    android:maxLines="1"
+                    android:textColor="@color/accent"
+                    android:textColorHint="@color/accent"
+                    android:textIsSelectable="false"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:textColorHint="@color/accent">
+
+            <AutoCompleteTextView
+                    android:id="@+id/update_birthday"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/prompt_birthday"
+                    android:inputType="none"
+                    android:maxLines="1"
+                    android:textColor="@color/accent"
+                    android:textColorHint="@color/accent"
+                    android:textIsSelectable="false"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:textColorHint="@color/accent">
+
+                <AutoCompleteTextView
+                    android:id="@+id/update_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/prompt_phone"
+                    android:imeOptions="actionNext"
+                    android:inputType="textNoSuggestions"
+                    android:maxLines="1"
+                    android:textColor="@color/accent"
+                    android:textColorHint="@color/accent"
+                    android:textIsSelectable="false"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:textColorHint="@color/accent">
+
+                <AutoCompleteTextView
+                    android:id="@+id/update_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/prompt_address"
+                    android:imeOptions="actionNext"
+                    android:inputType="textNoSuggestions"
+                    android:maxLines="1"
+                    android:textColor="@color/accent"
+                    android:textColorHint="@color/accent"
+                    android:textIsSelectable="false"
+                    android:freezesText="true"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
+
+            </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:textColorHint="@color/accent">
+
+                <AutoCompleteTextView
+                    android:id="@+id/update_cc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/prompt_cc"
+                    android:imeOptions="actionNext"
+                    android:inputType="textNoSuggestions"
+                    android:maxLines="1"
+                    android:textColor="@color/accent"
+                    android:textColorHint="@color/accent"
+                    android:textIsSelectable="false"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
+
+            </android.support.design.widget.TextInputLayout>
+        </LinearLayout>
+
+    </ScrollView>
+
+    <Button
+        android:id="@+id/profile_save_button"
+        style="?android:textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="40dp"
+        android:background="@color/primary"
+        android:onClick="saveUpdates"
+        android:text="@string/action_save_profile"
+        android:textColor="@color/icons"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:textStyle="bold" />
+
+
 </android.support.constraint.ConstraintLayout>

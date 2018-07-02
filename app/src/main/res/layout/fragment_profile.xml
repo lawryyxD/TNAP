@@ -55,7 +55,7 @@
             app:layout_constraintTop_toBottomOf="@id/profile_picture" />
 
         <TextView
-            android:id="@+id/profile_gender"
+            android:id="@+id/profile_nric"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
@@ -65,11 +65,21 @@
             android:padding="10dp" />
 
         <TextView
+            android:id="@+id/profile_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            app:layout_constraintTop_toBottomOf="@id/profile_nric"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:padding="10dp" />
+
+        <TextView
             android:id="@+id/profile_address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
-            app:layout_constraintTop_toBottomOf="@id/profile_gender"
+            app:layout_constraintTop_toBottomOf="@id/profile_email"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             android:padding="10dp" />

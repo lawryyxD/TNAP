@@ -26,7 +26,8 @@ import java.util.Map;
 public class ProfileFragment extends Fragment {
 
     private TextView mProfileName;
-    private TextView mProfileGender;
+    private TextView mProfileNRIC;
+    private TextView mProfileEmail;
     private TextView mProfileAddress;
     private Button mEditProfileButton;
 
@@ -52,11 +53,13 @@ public class ProfileFragment extends Fragment {
 
                         // Populate the page with details
                         mProfileName = (TextView) getView().findViewById(R.id.profile_name); // should put under onViewCreated()
-                        mProfileGender = (TextView) getView().findViewById(R.id.profile_gender);
+                        mProfileNRIC = (TextView) getView().findViewById(R.id.profile_nric);
+                        mProfileEmail = (TextView) getView().findViewById(R.id.profile_email);
                         mProfileAddress = (TextView) getView().findViewById(R.id.profile_address);
 
                         mProfileName.setText((String) userDetails.get("username"));
-                        mProfileGender.setText((String) userDetails.get("gender"));
+                        mProfileNRIC.setText((String) userDetails.get("nric"));
+                        mProfileEmail.setText((String) userDetails.get("email"));
                         mProfileAddress.setText((String) userDetails.get("address"));
 
                         Log.d("TNAP", "User data retrieved from Firestore");
@@ -83,6 +86,7 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), EditProfileActivity.class);
+                intent.putExtra("email", getArguments().getString("email"));
                 startActivity(intent);
             }
         });
