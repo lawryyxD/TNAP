@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.MultiAutoCompleteTextView;
@@ -115,5 +116,12 @@ public class EditCCInfoActivity extends AppCompatActivity {
         setResult(20, data);
         finish();
         Toast.makeText(this, "Info saved.", Toast.LENGTH_SHORT).show();
+    }
+
+    // back button functionality
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        onBackPressed();
+        return true;
     }
 }

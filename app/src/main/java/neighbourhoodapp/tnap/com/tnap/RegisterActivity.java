@@ -231,7 +231,7 @@ public class RegisterActivity extends AppCompatActivity implements OnItemSelecte
                 .show();
     }
 
-
+    // back button functionality
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         onBackPressed();

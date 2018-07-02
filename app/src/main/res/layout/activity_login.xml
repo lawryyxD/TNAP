@@ -18,11 +18,11 @@
         android:onClick="registerNewUser"
 
         android:layout_weight="1"
-        android:background="@color/primary_dark"
+        android:background="@color/cyan"
 
         android:text="@string/action_register"
-
         android:textColor="@color/icons"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toLeftOf="@id/sign_in_button"
         app:layout_constraintStart_toStartOf="parent"
@@ -38,7 +38,7 @@
         android:onClick="signInExistingUser"
 
         android:layout_weight="1"
-        android:background="@color/primary_dark"
+        android:background="@color/cyan"
 
         android:text="@string/action_sign_in"
         android:textColor="@color/icons"

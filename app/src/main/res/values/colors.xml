@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="primary">#03A9F4</color>
-    <color name="primary_dark">#0288D1</color>
-    <color name="primary_light">#B3E5FC</color>
-    <color name="accent">#607D8B</color>
+    <color name="primary">#044b77</color>
+    <color name="primary_dark">#0D47A1</color>
+    <color name="primary_light">#90CAF9</color>
+    <color name="accent">#BDBDBD</color>
     <color name="primary_text">#212121</color>
-    <color name="secondary_text">#757575</color>
+    <color name="secondary_text">#9E9E9E</color>
     <color name="icons">#FFFFFF</color>
     <color name="divider">#BDBDBD</color>
     <color name="white">#FFFFFF</color>
@@ -14,4 +14,16 @@
     <color name="yellow">#FFC107</color>
     <color name="black">#000000</color>
     <color name="instagram_blue">#044b77</color>
+    <color name="cyan">#0288D1</color>
+    <color name="bottom_nav_bg">#E0E0E0</color>
+    <color name="bottom_nav_icons">#616161</color>
+
+    <color name="old_primary">#03A9F4</color>
+    <color name="old_primary_dark">#0288D1</color>
+    <color name="old_primary_light">#B3E5FC</color>
+    <color name="old_accent">#607D8B</color>
+    <color name="old_primary_text">#212121</color>
+    <color name="old_secondary_text">#757575</color>
+    <color name="old_icons">#FFFFFF</color>
+    <color name="old_divider">#BDBDBD</color>
 </resources>

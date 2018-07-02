@@ -19,7 +19,7 @@
         <TextView
             android:id="@+id/title_bar"
             android:layout_width="match_parent"
-            android:layout_height="45dp"
+            android:layout_height="55dp"
             android:gravity="center"
 
             android:background="@color/instagram_blue"
@@ -33,25 +33,12 @@
             app:layout_constraintRight_toRightOf="parent"
             />
 
-    <SearchView
-        android:id="@+id/search_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/accent"
-
-        android:queryHint="@string/search_bar_text"
-
-        app:layout_constraintTop_toBottomOf="@id/title_bar"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        />
-
         <ImageView
             android:id="@+id/cc_banner"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:scaleType="fitStart"
-            app:layout_constraintTop_toBottomOf="@id/search_view"
+            app:layout_constraintTop_toBottomOf="@id/title_bar"
             android:src="@drawable/cc_loading"/>
 
     <TextView
