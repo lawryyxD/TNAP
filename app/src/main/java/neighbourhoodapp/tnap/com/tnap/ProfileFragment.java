@@ -6,6 +6,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +15,7 @@ import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -24,6 +27,9 @@ import java.util.Map;
 
 
 public class ProfileFragment extends Fragment {
+
+    // 20: open EditProfileActivity
+    private final int REQUEST_EDIT = 20;
 
     private TextView mProfileName;
     private TextView mProfileNRIC;
@@ -87,10 +93,25 @@ public class ProfileFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), EditProfileActivity.class);
                 intent.putExtra("email", getArguments().getString("email"));
-                startActivity(intent);
+                //startActivity(intent);
+                startActivityForResult(intent, REQUEST_EDIT);
             }
         });
         return view;
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_EDIT && resultCode == requestCode) {
+            // Can extract data passed in from EditProfileActivity using data.getExtras()...
+            // but in our case we don't need it here
+
+            // instead, refresh the page
+            FragmentManager fragmentManager = getFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            ProfileFragment refreshFrag = new ProfileFragment();
+            refreshFrag.setArguments(getArguments());
+            fragmentTransaction.replace(R.id.fragment_container, refreshFrag).addToBackStack(null).commit();
+        }
+    }
 }

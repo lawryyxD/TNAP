@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -106,8 +107,7 @@ public class EditProfileActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(Void aVoid) {
                         Log.d("TNAP", "DocumentSnapshot of user successfully updated!");
-                        finish();
-                        // TODO: Refresh the ProfileFragment but idk how lel
+                        cleanUp();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -116,5 +116,15 @@ public class EditProfileActivity extends AppCompatActivity {
                         Log.w("TNAP", "Error updating document of user", e);
                     }
                 });
+    }
+
+    private void cleanUp() {
+        // Prepare data intent
+        Intent data = new Intent();
+        // can pass relevant data back as a result using data.putExtra(key, value);
+        // Activity finished ok, return the data with result code
+        setResult(20, data);
+        finish();
+        Toast.makeText(this, "Profile saved.", Toast.LENGTH_SHORT).show();
     }
 }

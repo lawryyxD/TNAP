@@ -77,14 +77,14 @@ public class MainFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
         mRequestsButton = view.findViewById(R.id.main_requests_button);
 
-
         mRequestsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                RequestsFragment NAME = new RequestsFragment();
-                fragmentTransaction.replace(R.id.fragment_container, NAME).addToBackStack(null).commit();
+                RequestsFragment requestFrag = new RequestsFragment();
+                requestFrag.setArguments(getArguments());
+                fragmentTransaction.replace(R.id.fragment_container, requestFrag).addToBackStack(null).commit();
 
                 navigationView = getActivity().findViewById(R.id.navigation);
                 navigationView.getMenu().getItem(2).setChecked(true);
