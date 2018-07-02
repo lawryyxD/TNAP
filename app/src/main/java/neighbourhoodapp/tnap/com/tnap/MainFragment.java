@@ -31,12 +31,12 @@ import java.util.Map;
 public class MainFragment extends Fragment {
 
     private TextView mMainCC;
+    private Button mRequestsButton;
+    private BottomNavigationView navigationView;
 
     // Firebase stuff.
     private FirebaseFirestore mDatabase;
     private Map<String, Object> userDetails;
-    private Button mRequestsButton;
-    private BottomNavigationView navigationView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -84,8 +84,7 @@ public class MainFragment extends Fragment {
                 FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 RequestsFragment NAME = new RequestsFragment();
-                fragmentTransaction.replace(R.id.fragment_container, NAME);
-                fragmentTransaction.commit();
+                fragmentTransaction.replace(R.id.fragment_container, NAME).addToBackStack(null).commit();
 
                 navigationView = getActivity().findViewById(R.id.navigation);
                 navigationView.getMenu().getItem(2).setChecked(true);

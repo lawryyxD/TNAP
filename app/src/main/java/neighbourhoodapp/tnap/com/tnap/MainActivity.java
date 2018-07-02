@@ -35,25 +35,25 @@ public class MainActivity extends AppCompatActivity {
                     MainFragment mainFrag = new MainFragment();
                     mainFrag.setArguments(emailBundle);
                     getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.fragment_container, mainFrag).commit();
+                            .replace(R.id.fragment_container, mainFrag).addToBackStack(null).commit();
                     return true;
                 case R.id.navigation_events:
                     EventsFragment eventsFrag = new EventsFragment();
                     eventsFrag.setArguments(emailBundle);
                     getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.fragment_container, eventsFrag).commit();
+                            .replace(R.id.fragment_container, eventsFrag).addToBackStack(null).commit();
                     return true;
                 case R.id.navigation_requests:
                     RequestsFragment requestFrag = new RequestsFragment();
                     requestFrag.setArguments(emailBundle);
                     getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.fragment_container, requestFrag).commit();
+                            .replace(R.id.fragment_container, requestFrag).addToBackStack(null).commit();
                     return true;
                 case R.id.navigation_profile:
                     ProfileFragment profileFrag = new ProfileFragment();
                     profileFrag.setArguments(emailBundle);
                     getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.fragment_container, profileFrag).commit();
+                            .replace(R.id.fragment_container, profileFrag).addToBackStack(null).commit();
                     return true;
             }
             return false;

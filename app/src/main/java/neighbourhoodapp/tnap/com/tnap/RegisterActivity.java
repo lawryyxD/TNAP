@@ -163,6 +163,7 @@ public class RegisterActivity extends AppCompatActivity {
         newUser.put("phone", phone);
         newUser.put("address", address);
         newUser.put("cc", cc);
+        newUser.put("admin", 0);
         mDatabase.collection("users").document(email).set(newUser)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
