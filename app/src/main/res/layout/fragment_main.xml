@@ -10,7 +10,8 @@
     <!-- TODO: Update blank fragment layout -->
 <ScrollView
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    >
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
@@ -59,7 +60,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
 
-        app:layout_constraintTop_toBottomOf="@id/cc_banner"
+        app:layout_constraintTop_toBottomOf="@id/main_requests_button"
 
         android:text="@string/hello_main_fragment"
         android:textColor="@color/black"
