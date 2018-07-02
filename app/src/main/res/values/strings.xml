@@ -26,10 +26,16 @@
     <string name="prompt_address">Home Address</string>
     <string name="prompt_cc">Community Centre</string>
 
+    <string name="prompt_cc_address">CC Address</string>
+    <string name="prompt_cc_hours">Opening Hours</string>
+    <string name="prompt_cc_writeup">Writeup</string>
+    <string name="prompt_cc_phone">Phone Number</string>
+
     <string name="edit_profile">Edit Profile</string>
     <string name="search_bar_text">Search</string>
 
     <string name="action_save_profile">Save Profile</string>
+    <string name="action_save_cc_info">Save CC Info</string>
 
     <string name="action_call_cc">Contact Us</string>
 

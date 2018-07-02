@@ -57,16 +57,14 @@ public class ProfileFragment extends Fragment {
                         // successfully loaded user info from database
                         userDetails = document.getData();
 
-                        // Populate the page with details
-                        mProfileName = (TextView) getView().findViewById(R.id.profile_name); // should put under onViewCreated()
-                        mProfileNRIC = (TextView) getView().findViewById(R.id.profile_nric);
-                        mProfileEmail = (TextView) getView().findViewById(R.id.profile_email);
-                        mProfileAddress = (TextView) getView().findViewById(R.id.profile_address);
+                        boolean isAdmin = ((long) userDetails.get("admin") != 0);
 
-                        mProfileName.setText((String) userDetails.get("username"));
-                        mProfileNRIC.setText((String) userDetails.get("nric"));
-                        mProfileEmail.setText((String) userDetails.get("email"));
-                        mProfileAddress.setText((String) userDetails.get("address"));
+                        // populate the page
+                        if (isAdmin) {
+                            loadAdminView();
+                        } else {
+                            loadUserView();
+                        }
 
                         Log.d("TNAP", "User data retrieved from Firestore");
                     } else {
@@ -80,13 +78,46 @@ public class ProfileFragment extends Fragment {
 
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+    private void loadAdminView() {
+        mProfileName.setText((String) userDetails.get("cc"));
+        DocumentReference docRef = mDatabase.collection("ccs").document((String) userDetails.get("cc"));
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        // successfully loaded CC info from database
+                        Map<String, Object> ccDetails = document.getData();
+                        mProfileNRIC.setText((String) ccDetails.get("hours"));
+                        mProfileEmail.setText((String) ccDetails.get("phone"));
+                        mProfileAddress.setText((String) ccDetails.get("address"));
+                        Log.d("TNAP", "CC data retrieved from Firestore");
+                    } else {
+                        Log.d("TNAP", "No such CC");
+                    }
+                } else {
+                    Log.d("TNAP", "Failed to retrieve CC info with error: ", task.getException());
+                }
+            }
+        });
 
-        View view = inflater.inflate(R.layout.fragment_profile, container, false);
-        mEditProfileButton = view.findViewById(R.id.edit_profile_button);
+        mEditProfileButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), EditCCInfoActivity.class);
+                intent.putExtra("cc", (String) userDetails.get("cc"));
+                //startActivity(intent);
+                startActivityForResult(intent, REQUEST_EDIT);
+            }
+        });
+    }
+
+    private void loadUserView() {
+        mProfileName.setText((String) userDetails.get("username"));
+        mProfileNRIC.setText((String) userDetails.get("nric"));
+        mProfileEmail.setText((String) userDetails.get("email"));
+        mProfileAddress.setText((String) userDetails.get("address"));
 
         mEditProfileButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,12 +128,25 @@ public class ProfileFragment extends Fragment {
                 startActivityForResult(intent, REQUEST_EDIT);
             }
         });
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_profile, container, false);
+        mProfileName = (TextView) view.findViewById(R.id.profile_name);
+        mProfileNRIC = (TextView) view.findViewById(R.id.profile_nric);
+        mProfileEmail = (TextView) view.findViewById(R.id.profile_email);
+        mProfileAddress = (TextView) view.findViewById(R.id.profile_address);
+        mEditProfileButton = view.findViewById(R.id.edit_profile_button);
+
         return view;
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_EDIT && resultCode == requestCode) {
+        if (requestCode == REQUEST_EDIT && resultCode == requestCode) { // returning from Edit Profile page
             // Can extract data passed in from EditProfileActivity using data.getExtras()...
             // but in our case we don't need it here
 
