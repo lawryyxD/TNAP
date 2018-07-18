@@ -34,7 +34,7 @@ public class MainFragment extends Fragment {
 
     private ImageView mCCBanner;
     private TextView mMainCC;
-    private Button mRequestsButton;
+    private Button mEventsButton;
     private BottomNavigationView navigationView;
 
     // Firebase stuff.
@@ -100,21 +100,21 @@ public class MainFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_main, container, false);
-        mRequestsButton = view.findViewById(R.id.main_requests_button);
+        mEventsButton = view.findViewById(R.id.main_events_button);
         mCCBanner = (ImageView) view.findViewById(R.id.cc_banner);
         mMainCC = (TextView) view.findViewById(R.id.main_cc);
 
-        mRequestsButton.setOnClickListener(new View.OnClickListener() {
+        mEventsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                RequestsFragment requestFrag = new RequestsFragment();
-                requestFrag.setArguments(getArguments());
-                fragmentTransaction.replace(R.id.fragment_container, requestFrag).addToBackStack(null).commit();
+                EventsFragment eventFrag = new EventsFragment();
+                eventFrag.setArguments(getArguments());
+                fragmentTransaction.replace(R.id.fragment_container, eventFrag).addToBackStack(null).commit();
 
                 navigationView = getActivity().findViewById(R.id.navigation);
-                navigationView.getMenu().getItem(2).setChecked(true);
+                navigationView.getMenu().getItem(1).setChecked(true); // TODO: change index after removing Requests completely
             }
         });
 
