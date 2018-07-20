@@ -104,6 +104,7 @@ public class MainFragment extends Fragment {
         mCCBanner = (ImageView) view.findViewById(R.id.cc_banner);
         mMainCC = (TextView) view.findViewById(R.id.main_cc);
 
+        // TODO: add "See More" text for the events button; main screen only shows 3 events at most
         mEventsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

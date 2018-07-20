@@ -43,6 +43,8 @@
 
     <string name="action_call_cc">Contact Us</string>
 
+    <string name="action_add_event">Add New Event</string>
+
     <string-array name="gender_array">
         <item>Gender</item>
         <item>Male</item>

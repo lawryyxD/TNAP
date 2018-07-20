@@ -1,14 +1,28 @@
 package neighbourhoodapp.tnap.com.tnap;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.Map;
 
 /**
  * The Events feature on our application allows users to view available upcoming events organised by the Community Club
@@ -25,14 +39,65 @@ import android.view.ViewGroup;
 
 public class EventsFragment extends Fragment {
 
+    // 12: open AddEventActivity
+    private final int REQUEST_ADD = 12;
+
     private static final int NUM_LIST_ITEMS = 100;
     private EventsAdapter mAdapter;
     private RecyclerView mEventsList;
+
+    private Button mAddEventButton;
+
+    // Firebase stuff.
+    private FirebaseFirestore mDatabase;
+    private Map<String, Object> userDetails;
+    private String cc;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        mDatabase = FirebaseFirestore.getInstance();
+        String email = getArguments().getString("email");
+        DocumentReference docRef = mDatabase.collection("users").document(email);
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        // successfully loaded user info from database
+                        userDetails = document.getData();
+                        cc = (String) userDetails.get("cc");
+
+                        boolean isAdmin = ((long) userDetails.get("admin") != 0);
+
+                        // Include the Add New Event button for Admin only
+                        if (isAdmin) {
+                            mAddEventButton.setVisibility(View.VISIBLE);
+                            // TODO: make the button change to either Add Event or My Events (filter for non-admin)
+                            mAddEventButton.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    // TODO: Change to AddEventActivity.class
+                                    Intent intent = new Intent(getActivity(), CCInfoActivity.class);
+                                    intent.putExtra("cc", cc);
+                                    startActivityForResult(intent, REQUEST_ADD);
+                                }
+                            });
+                        }
+
+                        loadEvents(); // TODO: populate the list with events from Firestore
+
+                        Log.d("TNAP", "User data retrieved from Firestore");
+                    } else {
+                        Log.d("TNAP", "No such user");
+                    }
+                } else {
+                    Log.d("TNAP", "Failed to retrieve user with error: ", task.getException());
+                }
+            }
+        });
 
     }
 
@@ -41,6 +106,8 @@ public class EventsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_events, container, false);
+
+        mAddEventButton = (Button) view.findViewById(R.id.add_event_button);
 
         // We get a reference to our RecyclerView from xml using findViewById.
         // This allows us to do things like set the adapter of the RecyclerView and toggle visibility.
@@ -61,5 +128,24 @@ public class EventsFragment extends Fragment {
         mEventsList.setAdapter(mAdapter);
 
         return view;
+    }
+
+    public void loadEvents() {
+
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_ADD && resultCode == requestCode) { // returning from Add Event page
+            // Can extract data passed in from AddEventActivity using data.getExtras()...
+            // but in our case we don't need it here
+
+            // instead, refresh the page
+            FragmentManager fragmentManager = getFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            EventsFragment refreshFrag = new EventsFragment();
+            refreshFrag.setArguments(getArguments());
+            fragmentTransaction.replace(R.id.fragment_container, refreshFrag).addToBackStack(null).commit();
+        }
     }
 }

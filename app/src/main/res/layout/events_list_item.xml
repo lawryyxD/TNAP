@@ -10,6 +10,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/list_event_item"
         android:textSize="30sp"
+        android:padding="20dp"
         tools:text="Event" />
 
 </FrameLayout>
