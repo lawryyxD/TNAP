@@ -1,5 +1,6 @@
 package neighbourhoodapp.tnap.com.tnap;
 
+import android.app.LauncherActivity;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,9 +12,35 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.EventViewH
 
     private static final String TAG = EventsAdapter.class.getSimpleName();
 
-    private int mNumberItems; // number of items to display in the list
+    // an on-click handler to make it easy for an Activity to interface with the RecyclerView
+    final private ListItemClickListener mOnClickListener;
 
-    public EventsAdapter(int numberOfItems) { mNumberItems = numberOfItems; }
+    // number of ViewHolders that have been created to display any given RecyclerView
+    // approx number of list items that fit in the screen at once and add 2 to 4 to that number
+    private static int viewHolderCount;
+
+    // number of items to display in a list
+    private int mNumberItems;
+
+    /**
+     *  The interface that receives onCLick messages.
+     */
+    public interface ListItemClickListener {
+        void onListItemClick(int clickedItemIndex);
+    }
+
+    /**
+     * Constructor for GreenAdapter that accepts a number of items to display and the specification
+     * for the ListItemClickListener.
+     *
+     * @param numberOfItems Number of items to display in list
+     * @param listener Listener for list item clicks
+     */
+    public EventsAdapter(int numberOfItems, ListItemClickListener listener) {
+        mNumberItems = numberOfItems;
+        mOnClickListener = listener;
+        viewHolderCount = 0;
+    }
 
     /**
      *
@@ -37,6 +64,8 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.EventViewH
         View view = inflater.inflate(layoutIdForListItem, viewGroup, shouldAttachToParentImmediately);
         EventViewHolder viewHolder = new EventViewHolder(view);
 
+        viewHolderCount++;
+
         return viewHolder;
     }
 
@@ -51,7 +80,7 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.EventViewH
     @Override
     public void onBindViewHolder(EventViewHolder holder, int position) {
         // display the data
-        holder.displayEvent();
+        holder.displayEvent(position);
     }
 
     /**
@@ -68,7 +97,8 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.EventViewH
     /**
      * Cache of the children views for a list item.
      */
-    class EventViewHolder extends RecyclerView.ViewHolder {
+    class EventViewHolder extends RecyclerView.ViewHolder
+        implements View.OnClickListener {
 
         TextView listEventItemView; // an event listing
 
@@ -81,14 +111,23 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.EventViewH
         public EventViewHolder(View itemView) {
             super(itemView);
             listEventItemView = (TextView) itemView.findViewById(R.id.list_event_item);
-            // TODO: add onClickListeners
+            itemView.setOnClickListener(this);
         }
 
         /**
          * This method will properly display the event listing.
          */
-        void displayEvent() {
-            listEventItemView.setText("Attached!");
+        void displayEvent(int position) {
+            listEventItemView.setText("Attached to " + position + "!");
+        }
+
+        /**
+         * Called whenever a user clicks on an item in the list.
+         * @param v The view that was clicked
+         */
+        public void onClick(View v) {
+            int clickedPosition = getAdapterPosition();
+            mOnClickListener.onListItemClick(clickedPosition);
         }
     }
 }

@@ -41,16 +41,38 @@
             app:layout_constraintTop_toBottomOf="@id/title_bar"
             android:src="@drawable/cc_loading"/>
 
-    <TextView
-        android:id="@+id/main_cc"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        <TextView
+            android:id="@+id/my_events_1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
 
-        app:layout_constraintTop_toBottomOf="@id/main_events_button"
+            app:layout_constraintTop_toBottomOf="@id/main_events_button"
 
-        android:text="@string/hello_main_fragment"
-        android:textColor="@color/black"
-        />
+            android:text="No events"
+            android:textColor="@color/black"
+            />
+
+        <TextView
+            android:id="@+id/my_events_2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            app:layout_constraintTop_toBottomOf="@id/main_events_button"
+
+            android:text="No events"
+            android:textColor="@color/black"
+            />
+
+        <TextView
+            android:id="@+id/my_events_3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            app:layout_constraintTop_toBottomOf="@id/main_events_button"
+
+            android:text="No events"
+            android:textColor="@color/black"
+            />
 
         <Button
             android:id="@+id/main_events_button"

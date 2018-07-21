@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -37,7 +38,8 @@ import java.util.Map;
  * Notifications (for RSVP-ed events): NOT DONE
  */
 
-public class EventsFragment extends Fragment {
+public class EventsFragment extends Fragment
+        implements EventsAdapter.ListItemClickListener {
 
     // 12: open AddEventActivity
     private final int REQUEST_ADD = 12;
@@ -88,6 +90,7 @@ public class EventsFragment extends Fragment {
                         }
 
                         loadEvents(); // TODO: populate the list with events from Firestore
+                        // TODO: who is responsible for displaying each item in the list? EventsAdapter or here?
 
                         Log.d("TNAP", "User data retrieved from Firestore");
                     } else {
@@ -124,7 +127,7 @@ public class EventsFragment extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this.getContext());
         mEventsList.setLayoutManager(layoutManager);
         mEventsList.setHasFixedSize(true);
-        mAdapter = new EventsAdapter(NUM_LIST_ITEMS);
+        mAdapter = new EventsAdapter(NUM_LIST_ITEMS, this);
         mEventsList.setAdapter(mAdapter);
 
         return view;
@@ -147,5 +150,26 @@ public class EventsFragment extends Fragment {
             refreshFrag.setArguments(getArguments());
             fragmentTransaction.replace(R.id.fragment_container, refreshFrag).addToBackStack(null).commit();
         }
+    }
+
+    /**
+     * This is where we receive our callback.
+     *
+     * This callback is invoked when you click on an item in the list.
+     *
+     * @param clickedItemIndex Index in the list of the item that was clicked.
+     */
+    @Override
+    public void onListItemClick(int clickedItemIndex) {
+
+        // COMPLETED (12) Show a Toast when an item is clicked, displaying that item number that was clicked
+        /*
+         * Create a Toast and store it in our Toast field.
+         * The Toast that shows up will have a message similar to the following:
+         *
+         *                     Item #42 clicked.
+         */
+        String toastMessage = "Item #" + clickedItemIndex + " clicked.";
+        Toast.makeText(this.getContext(), toastMessage, Toast.LENGTH_LONG).show();
     }
 }
