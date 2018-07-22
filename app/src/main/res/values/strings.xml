@@ -73,6 +73,8 @@
     </string-array>
 
     <string name="hello_main_fragment">Loading your CC...</string>
+    <string name="loading">Loading...</string>
+    <string name="no_events">No events</string>
     <string name="hello_events_fragment">Hello events fragment</string>
     <string name="hello_profile_fragment">Loading your profile...</string>
     <string name="hello_requests_fragment">Hello requests fragment</string>

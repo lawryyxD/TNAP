@@ -157,12 +157,17 @@ public class MainFragment extends Fragment {
      * @param event The event details retrieved from Firestore.
      */
     public void showMyEvent(Event event) { // hardcoded
+
         if (eventNum == 1) {
             mEventsOne.setText(event.getDescription()); // TODO: add onClickListener
+
         } else if (eventNum == 2) {
             mEventsTwo.setText(event.getDescription());
+            mEventsTwo.setVisibility(View.VISIBLE);
+
         } else {
             mEventsThree.setText(event.getDescription());
+            mEventsThree.setVisibility(View.VISIBLE);
         }
         eventNum++;
     }
@@ -177,6 +182,9 @@ public class MainFragment extends Fragment {
         mEventsOne = (TextView) view.findViewById(R.id.my_events_1);
         mEventsTwo = (TextView) view.findViewById(R.id.my_events_2);
         mEventsThree = (TextView) view.findViewById(R.id.my_events_3);
+
+        mEventsTwo.setVisibility(View.GONE);
+        mEventsThree.setVisibility(View.GONE);
 
         // TODO: add "See More" text for the events button; main screen only shows 3 events at most
         mEventsButton.setOnClickListener(new View.OnClickListener() {

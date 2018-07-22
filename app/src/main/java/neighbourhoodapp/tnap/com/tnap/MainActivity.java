@@ -43,12 +43,12 @@ public class MainActivity extends AppCompatActivity {
                     getSupportFragmentManager().beginTransaction()
                             .replace(R.id.fragment_container, eventsFrag).addToBackStack(null).commit();
                     return true;
-                case R.id.navigation_requests:
-                    RequestsFragment requestFrag = new RequestsFragment();
-                    requestFrag.setArguments(emailBundle);
-                    getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.fragment_container, requestFrag).addToBackStack(null).commit();
-                    return true;
+//                case R.id.navigation_requests:
+//                    RequestsFragment requestFrag = new RequestsFragment();
+//                    requestFrag.setArguments(emailBundle);
+//                    getSupportFragmentManager().beginTransaction()
+//                            .replace(R.id.fragment_container, requestFrag).addToBackStack(null).commit();
+//                    return true;
                 case R.id.navigation_profile:
                     ProfileFragment profileFrag = new ProfileFragment();
                     profileFrag.setArguments(emailBundle);

@@ -13,10 +13,10 @@
         android:icon="@drawable/ic_action_name"
         android:title="@string/title_events" />
 
-    <item
-        android:id="@+id/navigation_requests"
-        android:icon="@drawable/ic_requests_black"
-        android:title="@string/title_requests" />
+    <!--<item-->
+        <!--android:id="@+id/navigation_requests"-->
+        <!--android:icon="@drawable/ic_requests_black"-->
+        <!--android:title="@string/title_requests" />-->
 
     <item
         android:id="@+id/navigation_profile"
