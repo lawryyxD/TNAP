@@ -139,7 +139,9 @@ public class EventsFragment extends Fragment
         mEventsList.setLayoutManager(layoutManager);
         mEventsList.setHasFixedSize(true);
 
-        mQuery = mDatabase.collection("events").whereEqualTo("eventid", 0);
+        if (mQuery == null) {
+            mQuery = mDatabase.collection("events").whereEqualTo("eventid", 0);
+        }
         mAdapter = new EventsAdapter(mQuery,this) {
             protected void onDataChanged() {
                 // show/hide content if the query remains empty.
@@ -147,6 +149,9 @@ public class EventsFragment extends Fragment
                     mEventsList.setVisibility(View.GONE);
                     mNoEventsError.setVisibility(View.VISIBLE);
                     // TODO: read up on Snackbars
+                } else {
+                    mEventsList.setVisibility(View.VISIBLE);
+                    mNoEventsError.setVisibility(View.GONE);
                 }
             }
         };
