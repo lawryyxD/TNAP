@@ -28,7 +28,8 @@
         <activity
             android:name=".RegisterActivity"
             android:label="@string/title_register"
-            android:parentActivityName=".LoginActivity">
+            android:parentActivityName=".LoginActivity"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="neighbourhoodapp.tnap.com.tnap.LoginActivity" />
@@ -42,7 +43,8 @@
         <activity
             android:name=".EditProfileActivity"
             android:label="@string/edit_profile"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
         <meta-data
             android:name="android.support.PARENT_ACTIVITY"
             android:value="neighbourhoodapp.tnap.com.tnap.MainActivity" />
@@ -51,7 +53,8 @@
         <activity
             android:name=".EditCCInfoActivity"
             android:label="@string/edit_cc_profile"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="neighbourhoodapp.tnap.com.tnap.MainActivity" />
@@ -60,7 +63,8 @@
         <activity
             android:name=".CCInfoActivity"
             android:label="@string/title_cc_profile"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
         <meta-data
             android:name="android.support.PARENT_ACTIVITY"
             android:value="neighbourhoodapp.tnap.com.tnap.MainActivity" />
@@ -69,7 +73,8 @@
         <activity
             android:name=".AddEventActivity"
             android:label="@string/title_add_event"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="neighbourhoodapp.tnap.com.tnap.MainActivity" />
@@ -78,7 +83,8 @@
         <activity
             android:name=".ShowEventActivity"
             android:label="@string/title_show_event"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="neighbourhoodapp.tnap.com.tnap.MainActivity" />

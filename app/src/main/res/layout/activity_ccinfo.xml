@@ -12,6 +12,9 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:scrollbars="none"
+        android:paddingBottom="80dp"
+        android:layout_marginBottom="10dp"
         app:layout_constraintTop_toTopOf="parent"
         >
 
@@ -33,7 +36,7 @@
                 android:id="@+id/cc_info_address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
+                android:padding="25dp"
                 android:textColor="@color/primary_text"
                 android:textIsSelectable="false"
                 android:textSize="25sp"
@@ -43,7 +46,7 @@
                 android:id="@+id/cc_info_hours"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
+                android:padding="25dp"
                 android:textColor="@color/primary_text"
                 android:textIsSelectable="false"
                 android:textSize="25sp"
@@ -53,28 +56,29 @@
                 android:id="@+id/cc_info_writeup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
+                android:padding="25dp"
                 android:textColor="@color/primary_text"
                 android:textIsSelectable="false"
                 android:textSize="25sp"
                 android:textStyle="bold" />
 
-            <Button
-                android:id="@+id/call_cc_button"
-                style="?android:textAppearanceMedium"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="25dp"
-                android:layout_marginRight="25dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="40dp"
-                android:background="@color/primary"
-                android:text="@string/action_call_cc"
-                android:textColor="@color/icons"
-                android:textStyle="bold" />
-
         </LinearLayout>
 
     </ScrollView>
+
+    <Button
+        android:id="@+id/call_cc_button"
+        style="?android:textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/gray_buttons"
+        android:text="@string/action_call_cc"
+        android:textColor="@color/icons"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 </android.support.constraint.ConstraintLayout>

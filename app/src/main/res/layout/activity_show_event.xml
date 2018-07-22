@@ -9,10 +9,14 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingBottom="100dp"
+        android:scrollbars="none"
+        android:paddingTop="25dp"
+        android:paddingBottom="80dp"
+        android:paddingStart="25dp"
+        android:paddingEnd="25dp"
+        android:layout_marginBottom="10dp"
         app:layout_constraintBottom_toTopOf="@id/event_action_button"
-        app:layout_constraintTop_toTopOf="parent"
-        >
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -21,76 +25,121 @@
             android:orientation="vertical"
             tools:context="nap.orbital2018.com.tnap.ShowEventActivity">
 
-                <TextView
-                    android:id="@+id/show_event_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/primary_text"
-                    android:textColorHint="@color/accent"
-                    android:textIsSelectable="false"
-                    android:textSize="25sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/show_event_desc"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/primary_text"
-                    android:textColorHint="@color/accent"
-                    android:textIsSelectable="false"
-                    android:textSize="25sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/show_event_venue"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/primary_text"
-                    android:textColorHint="@color/accent"
-                    android:textIsSelectable="false"
-                    android:textSize="25sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/show_event_capacity"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/primary_text"
-                    android:textColorHint="@color/accent"
-                    android:textIsSelectable="false"
-                    android:textSize="25sp"
-                    android:textStyle="bold" />
+            <TextView
+                android:id="@+id/show_event_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/primary_text"
+                android:textIsSelectable="false"
+                android:textSize="35sp"
+                android:textStyle="bold" />
 
             <TextView
-                    android:id="@+id/show_event_registerby"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/primary_text"
-                    android:textColorHint="@color/accent"
-                    android:textIsSelectable="false"
-                    android:freezesText="true"
-                    android:textSize="25sp"
-                    android:textStyle="bold" />
+                android:id="@+id/show_event_desc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:textColor="@color/primary_text"
+                android:textIsSelectable="false"
+                android:textSize="15sp" />
 
             <TextView
-                    android:id="@+id/show_event_start"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/primary_text"
-                    android:textColorHint="@color/accent"
-                    android:textIsSelectable="false"
-                    android:textSize="25sp"
-                    android:textStyle="bold" />
+                android:id="@+id/title_event_venue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:textColor="@color/primary_text"
+                android:textStyle="bold"
+                android:textSize="25sp"
+                android:text="@string/prompt_event_venue"/>
 
             <TextView
-                    android:id="@+id/show_event_end"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/primary_text"
-                    android:textColorHint="@color/accent"
-                    android:textIsSelectable="false"
-                    android:textSize="25sp"
-                    android:textStyle="bold" />
+                android:id="@+id/show_event_venue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:textColor="@color/dark_gray"
+                android:textIsSelectable="false"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/title_event_capacity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:textColor="@color/primary_text"
+                android:textStyle="bold"
+                android:textSize="25sp"
+                android:text="@string/prompt_event_capacity"/>
+
+            <TextView
+                android:id="@+id/show_event_capacity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:textColor="@color/dark_gray"
+                android:textIsSelectable="false"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/title_registerby"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:textColor="@color/primary_text"
+                android:textStyle="bold"
+                android:textSize="25sp"
+                android:text="@string/prompt_event_registerby"/>
+
+            <TextView
+                android:id="@+id/show_event_registerby"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:freezesText="true"
+                android:textColor="@color/dark_gray"
+                android:textIsSelectable="false"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/title_event_start"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:textColor="@color/primary_text"
+                android:textStyle="bold"
+                android:textSize="25sp"
+                android:text="@string/prompt_event_start"/>
+
+            <TextView
+                android:id="@+id/show_event_start"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:textColor="@color/dark_gray"
+                android:textIsSelectable="false"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/title_event_end"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:textColor="@color/primary_text"
+                android:textStyle="bold"
+                android:textSize="25sp"
+                android:text="@string/prompt_event_end"/>
+
+            <TextView
+                android:id="@+id/show_event_end"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:paddingBottom="15dp"
+                android:textColor="@color/dark_gray"
+                android:textColorHint="@color/accent"
+                android:textIsSelectable="false"
+                android:textSize="20sp" />
 
         </LinearLayout>
 
@@ -101,13 +150,13 @@
         style="?android:textAppearanceMedium"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="25dp"
-        android:layout_marginRight="25dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="40dp"
-        android:background="@color/primary"
+        android:layout_marginBottom="20dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/gray_buttons"
         android:textColor="@color/icons"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

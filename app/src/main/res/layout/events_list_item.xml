@@ -4,21 +4,30 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="20dp"
     tools:context=".EventsFragment">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         android:id="@+id/list_event_item_name"
-        android:textSize="30sp"
+        android:textSize="20sp"
+        android:textColor="@color/white"
+        android:background="@color/instagram_blue"
+        android:padding="15dp"
         tools:text="Event" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         android:id="@+id/list_event_item_startdate"
-        android:textSize="20sp"
+        android:textSize="15sp"
+        android:textColor="@color/accent"
         tools:text="Date" />
 
 </LinearLayout>
