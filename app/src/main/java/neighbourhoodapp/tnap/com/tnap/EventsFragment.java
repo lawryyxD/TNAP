@@ -35,8 +35,8 @@ import java.util.Map;
  * they will have access to the additional functions of creating and managing events, such as modifying the details or
  * checking the current RSVP statuses.
  *
- * Create events (Community-Centre user group only): NOT DONE
- * Display events: NOT DONE
+ * Create events (Community-Centre user group only): DONE
+ * Display events: DONE
  * Filter events: NOT DONE (maybe don't need ba)
  * Notifications (for RSVP-ed events): NOT DONE
  */
@@ -46,6 +46,8 @@ public class EventsFragment extends Fragment
 
     // 12: open AddEventActivity
     private final int REQUEST_ADD = 12;
+    // 15: open ShowEventActivity
+    private final int EVENT_DETAILS = 15;
 
     private EventsAdapter mAdapter;
     private RecyclerView mEventsList;
@@ -93,7 +95,6 @@ public class EventsFragment extends Fragment
                             mAddEventButton.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                    // TODO: Change to AddEventActivity.class
                                     Intent intent = new Intent(getActivity(), AddEventActivity.class);
                                     intent.putExtra("cc", cc);
                                     startActivityForResult(intent, REQUEST_ADD);
@@ -169,8 +170,8 @@ public class EventsFragment extends Fragment
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_ADD && resultCode == requestCode) { // returning from Add Event page
-            // Can extract data passed in from AddEventActivity using data.getExtras()...
+        if ((requestCode == REQUEST_ADD || requestCode == EVENT_DETAILS) && resultCode == requestCode) {
+            // Can extract data passed in from Add/ShowEventActivity using data.getExtras()...
             // but in our case we don't need it here
 
             // instead, refresh the page
@@ -192,17 +193,17 @@ public class EventsFragment extends Fragment
     public void onEventItemClick(DocumentSnapshot event) {
         // event.getData() returns a Map<String, Object> of the event details
         // Go to the details page for the selected event
-        Map<String, Object> eventDetails = event.getData();
-        String toastMessage = eventDetails.get("venue") + "!!";
-        Toast.makeText(this.getContext(), toastMessage, Toast.LENGTH_LONG).show();
+        Event eventDetails = event.toObject(Event.class);
+        Long admin = (Long) userDetails.get("admin");
+        // String toastMessage = eventDetails.get("venue") + "!!";
+        //Toast.makeText(this.getContext(), toastMessage, Toast.LENGTH_LONG).show();
 
-        /*
-        Intent intent = new Intent(getActivity(), EventInfoActivity.class);
+
+        Intent intent = new Intent(getActivity(), ShowEventActivity.class);
         intent.putExtra("email", getArguments().getString("email"));
-        intent.putExtra("cc", (String) eventDetails.get("cc"));
-        intent.putExtra("eventid", (int) eventDetails.get("eventid"));
+        intent.putExtra("admin", admin.intValue());
+        intent.putExtra("cc", eventDetails.getCC());
+        intent.putExtra("eventid", eventDetails.getEventid());
         startActivityForResult(intent, EVENT_DETAILS);
-        */
-
     }
 }

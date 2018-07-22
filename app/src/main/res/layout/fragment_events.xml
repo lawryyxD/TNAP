@@ -5,6 +5,8 @@
     android:layout_height="match_parent"
     tools:context=".EventsFragment">
 
+    <!-- TODO: cannot use FrameLayout for multiple views -->
+
     <Button
         android:id="@+id/add_event_button"
         style="?android:textAppearanceMedium"
