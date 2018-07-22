@@ -104,6 +104,7 @@ public class ShowEventActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     // TODO: Change to EditEventActivity.class
+                    // TODO: Create EditEventActivity.class
                     Intent intent = new Intent(getParent(), AddEventActivity.class);
                     intent.putExtra("cc", cc);
                     intent.putExtra("eventid", eventid);
@@ -144,30 +145,38 @@ public class ShowEventActivity extends AppCompatActivity {
     private void onRSVP() {
         // TODO: Add confirmation message before adding/removing RSVP
         if (isAttending) {
-            // Remove RSVP
-            mDatabase.collection("rsvps").document(rsvpId).delete()
-                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void aVoid) {
-                            Log.d("TNAP", "RSVP successfully deleted!");
-                            // update headcount
-                            eventDetails.setHeadcount(eventDetails.getHeadcount() - 1);
-                            mDatabase.collection("events")
-                                    .document(cc + " " + eventid)
-                                    .set(eventDetails);
-                            refreshPage();
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Log.w("TNAP", "Error deleting RSVP", e);
-                        }
-                    });
+            if (eventDetails.getRegisterby().before(new Date())) {
+                // Too late already
+                Toast.makeText(this, "Please contact the CC.", Toast.LENGTH_SHORT).show();
+            } else {
+                // Remove RSVP
+                mDatabase.collection("rsvps").document(rsvpId).delete()
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                Log.d("TNAP", "RSVP successfully deleted!");
+                                // update headcount
+                                eventDetails.setHeadcount(eventDetails.getHeadcount() - 1);
+                                mDatabase.collection("events")
+                                        .document(cc + " " + eventid)
+                                        .set(eventDetails);
+                                refreshPage();
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Log.w("TNAP", "Error deleting RSVP", e);
+                            }
+                        });
+            }
         } else {
             if (eventDetails.getHeadcount() >= eventDetails.getCapacity()) {
                 // Full already
                 Toast.makeText(this, "This event is full.", Toast.LENGTH_SHORT).show();
+            } else if (eventDetails.getRegisterby().before(new Date())) {
+                // Too late already
+                Toast.makeText(this, "You can no longer sign up.", Toast.LENGTH_SHORT).show();
             } else {
                 // Add RSVP
                 Map<String, Object> newRSVP = new HashMap<>();
