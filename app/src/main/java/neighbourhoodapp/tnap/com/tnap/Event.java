@@ -1,23 +1,25 @@
 package neighbourhoodapp.tnap.com.tnap;
 
+import com.google.firebase.firestore.ServerTimestamp;
+
 import java.util.Date;
 
 public class Event {
     private String cc;
-    private long capacity; // numbers are stored as long in Firestore
+    private int capacity; // numbers are stored as long in Firestore
     private String description;
-    private Date enddate;
-    private long eventid;
-    private long headcount;
+    private @ServerTimestamp Date enddate;
+    private int eventid;
+    private int headcount;
     private String name;
-    private Date registerby;
-    private Date startdate;
+    private @ServerTimestamp Date registerby;
+    private @ServerTimestamp Date startdate;
     private String venue;
 
     public Event() { } // needed for Firebase
 
-    public Event(String cc, long capacity, String description, Date enddate, long eventid,
-                 long headcount, String name, Date registerby, Date startdate, String venue) {
+    public Event(String cc, int capacity, String description, Date enddate, int eventid,
+                 int headcount, String name, Date registerby, Date startdate, String venue) {
         this.cc = cc;
         this.capacity = capacity;
         this.description = description;
@@ -31,15 +33,28 @@ public class Event {
     }
 
     // JavaBeans naming convention for Firebase
+    // getters
     public String getCC() { return cc; }
-    public long getCapacity() { return capacity; }
+    public int getCapacity() { return capacity; }
     public String getDescription() { return description; }
     public Date getEnddate() { return enddate; }
-    public long getEventid() { return eventid; }
-    public long getHeadcount() { return headcount; }
+    public int getEventid() { return eventid; }
+    public int getHeadcount() { return headcount; }
     public String getName() { return name; }
     public Date getRegisterby() { return registerby; }
     public Date getStartdate() { return startdate; }
     public String getVenue() { return venue; }
+
+    // setters
+    public void setCC(String cc) { this.cc = cc; }
+    public void setCapacity(int capacity) { this.capacity = capacity; }
+    public void setDescription(String description) { this.description = description; }
+    public void setEnddate(Date enddate) { this.enddate = enddate; }
+    public void setEventid(int eventid) { this.eventid = eventid; }
+    public void setHeadcount(int headcount) { this.headcount = headcount; }
+    public void setName(String name) { this.name = name; }
+    public void setRegisterby(Date registerby) { this.registerby = registerby; }
+    public void setStartdate(Date startdate) { this.startdate = startdate; }
+    public void setVenue(String venue) { this.venue = venue; }
 
 }

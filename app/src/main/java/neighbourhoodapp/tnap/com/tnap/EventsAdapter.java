@@ -2,44 +2,47 @@ package neighbourhoodapp.tnap.com.tnap;
 
 import android.app.LauncherActivity;
 import android.content.Context;
+import android.content.res.Resources;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.EventViewHolder> {
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.Query;
+
+import java.text.SimpleDateFormat;
+import java.util.Locale;
+
+public class EventsAdapter extends FirestoreAdapter<EventsAdapter.EventViewHolder> {
 
     private static final String TAG = EventsAdapter.class.getSimpleName();
 
     // an on-click handler to make it easy for an Activity to interface with the RecyclerView
-    final private ListItemClickListener mOnClickListener;
+    private OnEventClickListener mOnClickListener;
 
     // number of ViewHolders that have been created to display any given RecyclerView
     // approx number of list items that fit in the screen at once and add 2 to 4 to that number
-    private static int viewHolderCount;
-
-    // number of items to display in a list
-    private int mNumberItems;
+    // private static int viewHolderCount;
 
     /**
      *  The interface that receives onCLick messages.
      */
-    public interface ListItemClickListener {
-        void onListItemClick(int clickedItemIndex);
+    public interface OnEventClickListener {
+        void onEventItemClick(DocumentSnapshot event);
     }
 
     /**
      * Constructor for GreenAdapter that accepts a number of items to display and the specification
      * for the ListItemClickListener.
      *
-     * @param numberOfItems Number of items to display in list
      * @param listener Listener for list item clicks
      */
-    public EventsAdapter(int numberOfItems, ListItemClickListener listener) {
-        mNumberItems = numberOfItems;
+    public EventsAdapter(Query query, OnEventClickListener listener) {
+        super(query);
         mOnClickListener = listener;
-        viewHolderCount = 0;
+        // viewHolderCount = 0;
     }
 
     /**
@@ -64,7 +67,7 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.EventViewH
         View view = inflater.inflate(layoutIdForListItem, viewGroup, shouldAttachToParentImmediately);
         EventViewHolder viewHolder = new EventViewHolder(view);
 
-        viewHolderCount++;
+        // viewHolderCount++;
 
         return viewHolder;
     }
@@ -80,27 +83,16 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.EventViewH
     @Override
     public void onBindViewHolder(EventViewHolder holder, int position) {
         // display the data
-        holder.displayEvent(position);
-    }
-
-    /**
-     * This method simply returns the number of items to display. It is used behind the scenes
-     * to help layout our Views and for animations.
-     *
-     * @return The number of items available in our forecast
-     */
-    @Override
-    public int getItemCount() {
-        return mNumberItems;
+        holder.bind(getSnapshot(position), mOnClickListener);
     }
 
     /**
      * Cache of the children views for a list item.
      */
-    class EventViewHolder extends RecyclerView.ViewHolder
-        implements View.OnClickListener {
+    class EventViewHolder extends RecyclerView.ViewHolder {
 
-        TextView listEventItemView; // an event listing
+        TextView listEventNameView;
+        TextView listEventStartdateView;
 
         /**
          * Constructor for our ViewHolder. Within this constructor, we get a reference to our
@@ -110,24 +102,29 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.EventViewH
          */
         public EventViewHolder(View itemView) {
             super(itemView);
-            listEventItemView = (TextView) itemView.findViewById(R.id.list_event_item);
-            itemView.setOnClickListener(this);
+            listEventNameView = (TextView) itemView.findViewById(R.id.list_event_item_name);
+            listEventStartdateView = (TextView) itemView.findViewById(R.id.list_event_item_startdate);
         }
 
         /**
          * This method will properly display the event listing.
          */
-        void displayEvent(int position) {
-            listEventItemView.setText("Attached to " + position + "!");
-        }
+        void bind(final DocumentSnapshot snapshot, final OnEventClickListener listener) {
+            Event event = snapshot.toObject(Event.class);
+            // Resources resources = itemView.getResources();
+            listEventNameView.setText(event.getName());
 
-        /**
-         * Called whenever a user clicks on an item in the list.
-         * @param v The view that was clicked
-         */
-        public void onClick(View v) {
-            int clickedPosition = getAdapterPosition();
-            mOnClickListener.onListItemClick(clickedPosition);
+            listEventStartdateView.setText(new SimpleDateFormat(
+                    "dd/MM/yyyy hh:mm a", Locale.US).format(event.getStartdate()));
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null) {
+                        listener.onEventItemClick(snapshot);
+                    }
+                }
+            });
         }
     }
 }

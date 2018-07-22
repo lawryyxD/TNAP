@@ -14,7 +14,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -22,6 +24,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 
 import java.util.Map;
 
@@ -39,20 +42,22 @@ import java.util.Map;
  */
 
 public class EventsFragment extends Fragment
-        implements EventsAdapter.ListItemClickListener {
+        implements EventsAdapter.OnEventClickListener {
 
     // 12: open AddEventActivity
     private final int REQUEST_ADD = 12;
 
-    private static final int NUM_LIST_ITEMS = 100;
     private EventsAdapter mAdapter;
     private RecyclerView mEventsList;
+    private TextView mNoEventsError;
 
     private Button mAddEventButton;
 
     // Firebase stuff.
     private FirebaseFirestore mDatabase;
     private Map<String, Object> userDetails;
+    private Query mQuery;
+    private static final int LIMIT = 50; // for query
     private String cc;
 
     @Override
@@ -72,6 +77,13 @@ public class EventsFragment extends Fragment
                         userDetails = document.getData();
                         cc = (String) userDetails.get("cc");
 
+                        // get the events from the user's CC
+                        // TODO: add DATE check and only show events that have not passed yet
+                        mQuery = mDatabase.collection("events").whereEqualTo("cc", cc)
+                                .orderBy("startdate", Query.Direction.DESCENDING)
+                                .limit(LIMIT);
+                        mAdapter.setQuery(mQuery);
+
                         boolean isAdmin = ((long) userDetails.get("admin") != 0);
 
                         // Include the Add New Event button for Admin only
@@ -82,15 +94,12 @@ public class EventsFragment extends Fragment
                                 @Override
                                 public void onClick(View v) {
                                     // TODO: Change to AddEventActivity.class
-                                    Intent intent = new Intent(getActivity(), CCInfoActivity.class);
+                                    Intent intent = new Intent(getActivity(), AddEventActivity.class);
                                     intent.putExtra("cc", cc);
                                     startActivityForResult(intent, REQUEST_ADD);
                                 }
                             });
                         }
-
-                        loadEvents(); // TODO: populate the list with events from Firestore
-                        // TODO: who is responsible for displaying each item in the list? EventsAdapter or here?
 
                         Log.d("TNAP", "User data retrieved from Firestore");
                     } else {
@@ -115,6 +124,7 @@ public class EventsFragment extends Fragment
         // We get a reference to our RecyclerView from xml using findViewById.
         // This allows us to do things like set the adapter of the RecyclerView and toggle visibility.
         mEventsList = (RecyclerView) view.findViewById(R.id.rv_events);
+        mNoEventsError = (TextView) view.findViewById(R.id.no_events_error);
 
         /*
          * A LinearLayoutManager is responsible for measuring and positioning item views within a
@@ -127,14 +137,34 @@ public class EventsFragment extends Fragment
         LinearLayoutManager layoutManager = new LinearLayoutManager(this.getContext());
         mEventsList.setLayoutManager(layoutManager);
         mEventsList.setHasFixedSize(true);
-        mAdapter = new EventsAdapter(NUM_LIST_ITEMS, this);
+
+        mQuery = mDatabase.collection("events").whereEqualTo("eventid", 0);
+        mAdapter = new EventsAdapter(mQuery,this) {
+            protected void onDataChanged() {
+                // show/hide content if the query remains empty.
+                if (getItemCount() == 0) {
+                    mEventsList.setVisibility(View.GONE);
+                    mNoEventsError.setVisibility(View.VISIBLE);
+                    // TODO: read up on Snackbars
+                }
+            }
+        };
         mEventsList.setAdapter(mAdapter);
 
         return view;
     }
 
-    public void loadEvents() {
+    @Override
+    public void onStart() {
+        super.onStart();
+        // TODO: apply filters? onFilter( );
+        if (mAdapter != null) mAdapter.startListening();
+    }
 
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (mAdapter != null) mAdapter.stopListening();
     }
 
     @Override
@@ -154,22 +184,25 @@ public class EventsFragment extends Fragment
 
     /**
      * This is where we receive our callback.
-     *
      * This callback is invoked when you click on an item in the list.
      *
-     * @param clickedItemIndex Index in the list of the item that was clicked.
+     * @param event DocumentSnapshot of the event clicked.
      */
     @Override
-    public void onListItemClick(int clickedItemIndex) {
-
-        // COMPLETED (12) Show a Toast when an item is clicked, displaying that item number that was clicked
-        /*
-         * Create a Toast and store it in our Toast field.
-         * The Toast that shows up will have a message similar to the following:
-         *
-         *                     Item #42 clicked.
-         */
-        String toastMessage = "Item #" + clickedItemIndex + " clicked.";
+    public void onEventItemClick(DocumentSnapshot event) {
+        // event.getData() returns a Map<String, Object> of the event details
+        // Go to the details page for the selected event
+        Map<String, Object> eventDetails = event.getData();
+        String toastMessage = eventDetails.get("venue") + "!!";
         Toast.makeText(this.getContext(), toastMessage, Toast.LENGTH_LONG).show();
+
+        /*
+        Intent intent = new Intent(getActivity(), EventInfoActivity.class);
+        intent.putExtra("email", getArguments().getString("email"));
+        intent.putExtra("cc", (String) eventDetails.get("cc"));
+        intent.putExtra("eventid", (int) eventDetails.get("eventid"));
+        startActivityForResult(intent, EVENT_DETAILS);
+        */
+
     }
 }

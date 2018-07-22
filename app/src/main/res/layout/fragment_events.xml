@@ -20,6 +20,14 @@
         android:visibility="gone"
         android:textStyle="bold" />
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="50dp"
+        android:text="No Events Found"
+        android:id="@+id/no_events_error"
+        android:visibility="gone" />
+
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"

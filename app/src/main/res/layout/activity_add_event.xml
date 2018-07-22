@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddEventActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="100dp"
+        app:layout_constraintBottom_toTopOf="@id/event_save_button"
+        app:layout_constraintTop_toTopOf="parent"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top"
+            android:orientation="vertical"
+            tools:context="nap.orbital2018.com.tnap.AddEventActivity">
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:textColorHint="@color/accent">
+
+                <AutoCompleteTextView
+                    android:id="@+id/add_event_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/prompt_event_name"
+                    android:imeOptions="actionNext"
+                    android:inputType="textNoSuggestions"
+                    android:maxLines="1"
+                    android:textColor="@color/primary_text"
+                    android:textColorHint="@color/accent"
+                    android:textIsSelectable="false"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:textColorHint="@color/accent">
+
+                <AutoCompleteTextView
+                    android:id="@+id/add_event_desc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/prompt_event_desc"
+                    android:imeOptions="actionNext"
+                    android:inputType="textNoSuggestions"
+                    android:maxLines="1"
+                    android:textColor="@color/primary_text"
+                    android:textColorHint="@color/accent"
+                    android:textIsSelectable="false"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:textColorHint="@color/accent">
+
+                <AutoCompleteTextView
+                    android:id="@+id/add_event_venue"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/prompt_event_venue"
+                    android:inputType="none"
+                    android:maxLines="1"
+                    android:textColor="@color/primary_text"
+                    android:textColorHint="@color/accent"
+                    android:textIsSelectable="false"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:textColorHint="@color/accent">
+
+                <!-- TODO: set Number keyboard -->
+                <AutoCompleteTextView
+                    android:id="@+id/add_event_capacity"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/prompt_event_capacity"
+                    android:imeOptions="actionNext"
+                    android:inputType="textNoSuggestions"
+                    android:maxLines="1"
+                    android:textColor="@color/primary_text"
+                    android:textColorHint="@color/accent"
+                    android:textIsSelectable="false"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:textColorHint="@color/accent">
+
+                <AutoCompleteTextView
+                    android:id="@+id/add_event_registerby"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/prompt_event_registerby"
+                    android:imeOptions="actionNext"
+                    android:inputType="textNoSuggestions"
+                    android:maxLines="1"
+                    android:textColor="@color/primary_text"
+                    android:textColorHint="@color/accent"
+                    android:textIsSelectable="false"
+                    android:freezesText="true"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:textColorHint="@color/accent">
+
+                <AutoCompleteTextView
+                    android:id="@+id/add_event_start"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/prompt_event_start"
+                    android:imeOptions="actionNext"
+                    android:inputType="textNoSuggestions"
+                    android:maxLines="1"
+                    android:textColor="@color/primary_text"
+                    android:textColorHint="@color/accent"
+                    android:textIsSelectable="false"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:textColorHint="@color/accent">
+
+                <AutoCompleteTextView
+                    android:id="@+id/add_event_end"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/prompt_event_end"
+                    android:imeOptions="actionNext"
+                    android:inputType="textNoSuggestions"
+                    android:maxLines="1"
+                    android:textColor="@color/primary_text"
+                    android:textColorHint="@color/accent"
+                    android:textIsSelectable="false"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
+
+            </android.support.design.widget.TextInputLayout>
+        </LinearLayout>
+
+    </ScrollView>
+
+    <Button
+        android:id="@+id/event_save_button"
+        style="?android:textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="40dp"
+        android:background="@color/primary"
+        android:onClick="addEvent"
+        android:text="@string/action_save_event"
+        android:textColor="@color/icons"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:textStyle="bold" />
+
+
+</android.support.constraint.ConstraintLayout>

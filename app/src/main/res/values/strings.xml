@@ -21,6 +21,7 @@
     <string name="title_requests">Requests</string>
     <string name="title_profile">Profile</string>
     <string name="title_cc_profile">Community Club Profile</string>
+    <string name="title_add_event">Add Event</string>
 
     <string name="prompt_nric">NRIC</string>
     <string name="prompt_gender">Gender</string>
@@ -44,6 +45,14 @@
     <string name="action_call_cc">Contact Us</string>
 
     <string name="action_add_event">Add New Event</string>
+    <string name="action_save_event">Save Event</string>
+    <string name="prompt_event_name">Event Name</string>
+    <string name="prompt_event_desc">Description</string>
+    <string name="prompt_event_venue">Venue</string>
+    <string name="prompt_event_capacity">Capacity</string>
+    <string name="prompt_event_registerby">Register By</string>
+    <string name="prompt_event_start">Start Date/Time</string>
+    <string name="prompt_event_end">End Date/Time</string>
 
     <string-array name="gender_array">
         <item>Gender</item>
