@@ -20,6 +20,7 @@
     <color name="bottom_nav_icons">#616161</color>
     <color name="dark_gray">#757575</color>
     <color name="gray_buttons">#323232  </color>
+    <color name="loading_purple">#976d9e</color>
 
     <color name="old_primary">#03A9F4</color>
     <color name="old_primary_dark">#0288D1</color>

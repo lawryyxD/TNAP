@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/loading_purple"
     android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
     tools:context=".MainActivity">
 
@@ -18,6 +19,28 @@
         android:layout_height="match_parent"
         android:textSize="30sp"
         android:layout_marginBottom="55dp" />
+
+    <pl.droidsonroids.gif.GifImageView
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:id="@+id/loading_gif"
+        android:src="@drawable/loadingcatgif"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/loading_text"
+        android:text="@string/loading"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/loading_gif"
+        app:layout_constraintTop_toTopOf="@id/loading_gif"
+        android:paddingTop="175dp"
+        android:paddingStart="15dp"
+        />
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navigation"

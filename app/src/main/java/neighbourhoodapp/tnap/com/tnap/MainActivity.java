@@ -21,11 +21,17 @@ import com.google.firebase.firestore.Query;
 
 import java.util.Map;
 
+import pl.droidsonroids.gif.GifImageView;
+
 public class MainActivity extends AppCompatActivity {
 
     // Firebase stuff.
     private FirebaseFirestore mDatabase;
     private Map<String, Object> userDetails;
+
+    //Loading screen stuff
+    private GifImageView mGifImageView;
+    private TextView mLoadingText;
 
     private Bundle userBundle; // to access user details among fragments
 
@@ -98,6 +104,10 @@ public class MainActivity extends AppCompatActivity {
                         navigation.setVisibility(View.VISIBLE);
 
                         // TODO: make the Loading screen disappear
+                        mGifImageView = findViewById(R.id.loading_gif);
+                        mLoadingText = findViewById(R.id.loading_text);
+                        mGifImageView.setVisibility(View.GONE);
+                        mLoadingText.setVisibility(View.GONE);
 
                         Log.d("TNAP", "User data retrieved from Firestore");
                     } else {
