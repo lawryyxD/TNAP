@@ -35,6 +35,8 @@ public class ShowEventActivity extends AppCompatActivity {
 
     // 13: open EditEventActivity
     private final int REQUEST_EDIT = 13;
+    // 21: open RSVPActivity
+    private final int CHECK_RSVP = 21;
 
     private TextView mNameView;
     private TextView mDescView;
@@ -108,6 +110,14 @@ public class ShowEventActivity extends AppCompatActivity {
                     openEditEventActivity();
                 }
             });
+
+            mCapacityView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    openRSVPActivity();
+                }
+            });
+
         } else {
             // check if user is attending
             Query mMyEventQuery = mDatabase.collection("rsvps").whereEqualTo("email", email)
@@ -144,6 +154,14 @@ public class ShowEventActivity extends AppCompatActivity {
         intent.putExtra("cc", cc);
         intent.putExtra("eventid", eventid);
         startActivityForResult(intent, REQUEST_EDIT);
+    }
+
+    private void openRSVPActivity() {
+        Intent intent = new Intent(this, RSVPActivity.class);
+        intent.putExtra("cc", cc);
+        intent.putExtra("eventid", eventid);
+        intent.putExtra("name", eventDetails.getName());
+        startActivityForResult(intent, CHECK_RSVP);
     }
 
     private void onRSVP() {
@@ -239,7 +257,7 @@ public class ShowEventActivity extends AppCompatActivity {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_EDIT && resultCode == requestCode) {
+        if ((requestCode == CHECK_RSVP || requestCode == REQUEST_EDIT) && resultCode == requestCode) {
             // Can extract data passed in from EditEventActivity using data.getExtras()...
             // but in our case we don't need it here
 

@@ -75,9 +75,12 @@ public class EditEventActivity extends AppCompatActivity {
                         mDescView.setText(eventDetails.getDescription());
                         mVenueView.setText(eventDetails.getVenue());
                         mCapacityView.setText("" + eventDetails.getCapacity());
-                        mRegisterByView.setText(eventDetails.getRegisterby().toString());
-                        mStartView.setText(eventDetails.getStartdate().toString());
-                        mEndView.setText(eventDetails.getEnddate().toString());
+                        mRegisterByView.setText(new SimpleDateFormat(
+                                "dd/MM/yyyy hh:mm a", Locale.US).format(eventDetails.getRegisterby()));
+                        mStartView.setText(new SimpleDateFormat(
+                                "dd/MM/yyyy hh:mm a", Locale.US).format(eventDetails.getStartdate()));
+                        mEndView.setText(new SimpleDateFormat(
+                                "dd/MM/yyyy hh:mm a", Locale.US).format(eventDetails.getEnddate()));
 
                         Log.d("TNAP", "Event data retrieved from Firestore");
                     } else {
