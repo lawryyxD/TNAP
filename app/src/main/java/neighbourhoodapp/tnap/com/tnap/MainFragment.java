@@ -38,6 +38,9 @@ import java.util.Map;
 
 public class MainFragment extends Fragment {
 
+    // 15: open ShowEventActivity
+    private final int EVENT_DETAILS = 15;
+
     private ImageView mCCBanner;
     private TextView mEventsOne;
     private TextView mEventsTwo;
@@ -120,19 +123,61 @@ public class MainFragment extends Fragment {
      * @param event The event details retrieved from Firestore.
      */
     public void showMyEvent(Event event) { // hardcoded
-
+        final int eventid = event.getEventid();
         if (eventNum == 1) {
-            mEventsOne.setText(event.getName()); // TODO: add onClickListener
+            mEventsOne.setText(event.getName());
+            mEventsOne.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    openEventDetails(eventid);
+                }
+            });
 
         } else if (eventNum == 2) {
             mEventsTwo.setText(event.getName());
             mEventsTwo.setVisibility(View.VISIBLE);
+            mEventsTwo.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    openEventDetails(eventid);
+                }
+            });
 
         } else {
             mEventsThree.setText(event.getName());
             mEventsThree.setVisibility(View.VISIBLE);
+            mEventsThree.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    openEventDetails(eventid);
+                }
+            });
         }
         eventNum++;
+    }
+
+    private void openEventDetails(int eventid) {
+        Intent intent = new Intent(getActivity(), ShowEventActivity.class);
+        intent.putExtra("email", email);
+        intent.putExtra("admin", isAdmin);
+        intent.putExtra("cc", cc);
+        intent.putExtra("eventid", eventid);
+        startActivityForResult(intent, EVENT_DETAILS);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == EVENT_DETAILS && resultCode == requestCode) {
+            // Can extract data passed in from ShowEventActivity using data.getExtras()...
+            // but in our case we don't need it here
+
+            // instead, refresh the page
+            FragmentManager fragmentManager = getFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            MainFragment refreshFrag = new MainFragment();
+            refreshFrag.setArguments(getArguments());
+            fragmentTransaction.replace(R.id.fragment_container, refreshFrag).addToBackStack(null).commit();
+        }
     }
 
     @Override
@@ -148,6 +193,7 @@ public class MainFragment extends Fragment {
 
         mEventsTwo.setVisibility(View.GONE);
         mEventsThree.setVisibility(View.GONE);
+
 
         switch (cc) {
             case "Computing CC":

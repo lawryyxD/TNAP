@@ -9,6 +9,8 @@
     android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
     tools:context=".MainActivity">
 
+    <!-- TODO: add Loading screen -->
+
     <!-- might wanna put this FrameLayout into a scrollview -->
     <FrameLayout
         android:id="@+id/fragment_container"
@@ -30,6 +32,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:menu="@menu/navigation"
+        android:visibility="gone"
         />
 
 </android.support.constraint.ConstraintLayout>

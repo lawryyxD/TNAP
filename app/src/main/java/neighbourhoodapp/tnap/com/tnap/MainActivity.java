@@ -95,6 +95,9 @@ public class MainActivity extends AppCompatActivity {
                         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
                         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
                         navigation.setItemBackgroundResource(R.drawable.menubackground);
+                        navigation.setVisibility(View.VISIBLE);
+
+                        // TODO: make the Loading screen disappear
 
                         Log.d("TNAP", "User data retrieved from Firestore");
                     } else {

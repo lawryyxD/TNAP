@@ -90,6 +90,16 @@
                 android:value="neighbourhoodapp.tnap.com.tnap.MainActivity" />
         </activity>
 
+        <activity
+            android:name=".EditEventActivity"
+            android:label="@string/title_show_event"
+            android:parentActivityName=".ShowEventActivity"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="neighbourhoodapp.tnap.com.tnap.ShowEventActivity" />
+        </activity>
+
     </application>
 
 </manifest>

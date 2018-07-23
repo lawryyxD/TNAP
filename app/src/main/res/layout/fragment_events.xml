@@ -54,7 +54,7 @@
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="400dp"
         android:overScrollMode="never"
         android:id="@+id/rv_events"
         app:layout_constraintTop_toBottomOf="@id/add_event_button"

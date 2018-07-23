@@ -72,9 +72,6 @@ public class EventsFragment extends Fragment
         email = getArguments().getString("email");
         cc = getArguments().getString("cc");
         isAdmin = getArguments().getBoolean("isAdmin");
-        mQuery = mDatabase.collection("events").whereEqualTo("cc", cc)
-                .orderBy("startdate", Query.Direction.DESCENDING)
-                .limit(LIMIT);
     }
 
     @Override
@@ -115,6 +112,9 @@ public class EventsFragment extends Fragment
         mEventsList.setLayoutManager(layoutManager);
         mEventsList.setHasFixedSize(true);
 
+        mQuery = mDatabase.collection("events").whereEqualTo("cc", cc)
+                .orderBy("startdate", Query.Direction.DESCENDING)
+                .limit(LIMIT);
         mAdapter = new EventsAdapter(mQuery,this) {
             protected void onDataChanged() {
                 // show/hide content if the query remains empty.

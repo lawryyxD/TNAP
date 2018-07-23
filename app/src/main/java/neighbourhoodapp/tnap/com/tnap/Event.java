@@ -15,6 +15,7 @@ public class Event {
     private @ServerTimestamp Date registerby;
     private @ServerTimestamp Date startdate;
     private String venue;
+    private boolean cancelled;
 
     public Event() { } // needed for Firebase
 
@@ -30,6 +31,7 @@ public class Event {
         this.registerby = registerby;
         this.startdate = startdate;
         this.venue = venue;
+        this.cancelled = false;
     }
 
     // JavaBeans naming convention for Firebase
@@ -44,6 +46,7 @@ public class Event {
     public Date getRegisterby() { return registerby; }
     public Date getStartdate() { return startdate; }
     public String getVenue() { return venue; }
+    public boolean getCancelled() { return cancelled; }
 
     // setters
     public void setCC(String cc) { this.cc = cc; }
@@ -56,5 +59,6 @@ public class Event {
     public void setRegisterby(Date registerby) { this.registerby = registerby; }
     public void setStartdate(Date startdate) { this.startdate = startdate; }
     public void setVenue(String venue) { this.venue = venue; }
+    public void setCancelled(boolean isCancelled) { this.cancelled = isCancelled; }
 
 }

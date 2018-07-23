@@ -3,6 +3,8 @@ package neighbourhoodapp.tnap.com.tnap;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
@@ -103,13 +105,8 @@ public class ShowEventActivity extends AppCompatActivity {
             mEventActionButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    // TODO: Change to EditEventActivity.class
-                    // TODO: Create EditEventActivity.class
-                    Intent intent = new Intent(getParent(), AddEventActivity.class);
-                    intent.putExtra("cc", cc);
-                    intent.putExtra("eventid", eventid);
-                    startActivityForResult(intent, REQUEST_EDIT);
-                    }
+                    openEditEventActivity();
+                }
             });
         } else {
             // check if user is attending
@@ -140,6 +137,13 @@ public class ShowEventActivity extends AppCompatActivity {
                 }
             });
         }
+    }
+
+    private void openEditEventActivity() {
+        Intent intent = new Intent(this, EditEventActivity.class);
+        intent.putExtra("cc", cc);
+        intent.putExtra("eventid", eventid);
+        startActivityForResult(intent, REQUEST_EDIT);
     }
 
     private void onRSVP() {
@@ -233,12 +237,23 @@ public class ShowEventActivity extends AppCompatActivity {
                 "dd/MM/yyyy hh:mm a", Locale.US).format(eventDetails.getEnddate()));
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_EDIT && resultCode == requestCode) {
+            // Can extract data passed in from EditEventActivity using data.getExtras()...
+            // but in our case we don't need it here
+
+            // instead, refresh the page
+            refreshPage();
+        }
+    }
+
     // back button functionality
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         onBackPressed();
-        Intent data = new Intent();
-        setResult(15, data);
+        // Intent data = new Intent();
+        // setResult(15, data);
         return true;
     }
 }
