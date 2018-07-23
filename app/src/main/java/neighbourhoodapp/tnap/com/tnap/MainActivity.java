@@ -23,7 +23,11 @@ import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Bundle emailBundle; // to access user details among fragments
+    // Firebase stuff.
+    private FirebaseFirestore mDatabase;
+    private Map<String, Object> userDetails;
+
+    private Bundle userBundle; // to access user details among fragments
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -33,13 +37,13 @@ public class MainActivity extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
                     MainFragment mainFrag = new MainFragment();
-                    mainFrag.setArguments(emailBundle);
+                    mainFrag.setArguments(userBundle);
                     getSupportFragmentManager().beginTransaction()
                             .replace(R.id.fragment_container, mainFrag).addToBackStack(null).commit();
                     return true;
                 case R.id.navigation_events:
                     EventsFragment eventsFrag = new EventsFragment();
-                    eventsFrag.setArguments(emailBundle);
+                    eventsFrag.setArguments(userBundle);
                     getSupportFragmentManager().beginTransaction()
                             .replace(R.id.fragment_container, eventsFrag).addToBackStack(null).commit();
                     return true;
@@ -51,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
 //                    return true;
                 case R.id.navigation_profile:
                     ProfileFragment profileFrag = new ProfileFragment();
-                    profileFrag.setArguments(emailBundle);
+                    profileFrag.setArguments(userBundle);
                     getSupportFragmentManager().beginTransaction()
                             .replace(R.id.fragment_container, profileFrag).addToBackStack(null).commit();
                     return true;
@@ -65,20 +69,42 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        emailBundle = getIntent().getExtras();
-
         // restored from prev state, don't need to do anything
         if (savedInstanceState != null) return;
 
-        MainFragment mainFrag = new MainFragment();
-        mainFrag.setArguments(emailBundle);
-        getSupportFragmentManager().beginTransaction()
-                .add(R.id.fragment_container, mainFrag).commit();
+        userBundle = getIntent().getExtras();
+        mDatabase = FirebaseFirestore.getInstance();
+        String email = getIntent().getStringExtra("email");
+        DocumentReference docRef = mDatabase.collection("users").document(email);
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        // successfully loaded user info from database
+                        userDetails = document.getData();
+                        userBundle.putString("cc", (String) userDetails.get("cc"));
+                        userBundle.putBoolean("isAdmin", ((long) userDetails.get("admin") != 0));
 
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-        navigation.setItemBackgroundResource(R.drawable.menubackground);
+                        MainFragment mainFrag = new MainFragment();
+                        mainFrag.setArguments(userBundle);
+                        getSupportFragmentManager().beginTransaction()
+                                .add(R.id.fragment_container, mainFrag).commit();
 
+                        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+                        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+                        navigation.setItemBackgroundResource(R.drawable.menubackground);
+
+                        Log.d("TNAP", "User data retrieved from Firestore");
+                    } else {
+                        Log.d("TNAP", "No such user");
+                    }
+                } else {
+                    Log.d("TNAP", "Failed to retrieve user with error: ", task.getException());
+                }
+            }
+        });
     }
 
 }

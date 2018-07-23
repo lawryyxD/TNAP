@@ -57,61 +57,24 @@ public class EventsFragment extends Fragment
 
     // Firebase stuff.
     private FirebaseFirestore mDatabase;
-    private Map<String, Object> userDetails;
     private Query mQuery;
     private static final int LIMIT = 50; // for query
+
+    // Info loaded from MainActivity
+    private String email;
     private String cc;
+    private boolean isAdmin;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         mDatabase = FirebaseFirestore.getInstance();
-        String email = getArguments().getString("email");
-        DocumentReference docRef = mDatabase.collection("users").document(email);
-        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot document = task.getResult();
-                    if (document.exists()) {
-                        // successfully loaded user info from database
-                        userDetails = document.getData();
-                        cc = (String) userDetails.get("cc");
-
-                        // get the events from the user's CC
-                        // TODO: add DATE check and only show events that have not passed yet
-                        mQuery = mDatabase.collection("events").whereEqualTo("cc", cc)
-                                .orderBy("startdate", Query.Direction.DESCENDING)
-                                .limit(LIMIT);
-                        mAdapter.setQuery(mQuery);
-
-                        boolean isAdmin = ((long) userDetails.get("admin") != 0);
-
-                        // Include the Add New Event button for Admin only
-                        if (isAdmin) {
-                            mAddEventButton.setVisibility(View.VISIBLE);
-                            // TODO: make the button change to either Add Event or My Events (filter for non-admin)
-                            mAddEventButton.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    Intent intent = new Intent(getActivity(), AddEventActivity.class);
-                                    intent.putExtra("cc", cc);
-                                    startActivityForResult(intent, REQUEST_ADD);
-                                }
-                            });
-                        }
-
-                        Log.d("TNAP", "User data retrieved from Firestore");
-                    } else {
-                        Log.d("TNAP", "No such user");
-                    }
-                } else {
-                    Log.d("TNAP", "Failed to retrieve user with error: ", task.getException());
-                }
-            }
-        });
-
+        email = getArguments().getString("email");
+        cc = getArguments().getString("cc");
+        isAdmin = getArguments().getBoolean("isAdmin");
+        mQuery = mDatabase.collection("events").whereEqualTo("cc", cc)
+                .orderBy("startdate", Query.Direction.DESCENDING)
+                .limit(LIMIT);
     }
 
     @Override
@@ -121,6 +84,19 @@ public class EventsFragment extends Fragment
         View view = inflater.inflate(R.layout.fragment_events, container, false);
 
         mAddEventButton = (Button) view.findViewById(R.id.add_event_button);
+
+        if (isAdmin) {
+            mAddEventButton.setVisibility(View.VISIBLE);
+            // TODO: make the button change to either Add Event or My Events (filter for non-admin)
+            mAddEventButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getActivity(), AddEventActivity.class);
+                    intent.putExtra("cc", cc);
+                    startActivityForResult(intent, REQUEST_ADD);
+                }
+            });
+        }
 
         // We get a reference to our RecyclerView from xml using findViewById.
         // This allows us to do things like set the adapter of the RecyclerView and toggle visibility.
@@ -139,9 +115,6 @@ public class EventsFragment extends Fragment
         mEventsList.setLayoutManager(layoutManager);
         mEventsList.setHasFixedSize(true);
 
-        if (mQuery == null) {
-            mQuery = mDatabase.collection("events").whereEqualTo("eventid", 0);
-        }
         mAdapter = new EventsAdapter(mQuery,this) {
             protected void onDataChanged() {
                 // show/hide content if the query remains empty.
@@ -199,14 +172,13 @@ public class EventsFragment extends Fragment
         // event.getData() returns a Map<String, Object> of the event details
         // Go to the details page for the selected event
         Event eventDetails = event.toObject(Event.class);
-        Long admin = (Long) userDetails.get("admin");
         // String toastMessage = eventDetails.get("venue") + "!!";
         //Toast.makeText(this.getContext(), toastMessage, Toast.LENGTH_LONG).show();
 
 
         Intent intent = new Intent(getActivity(), ShowEventActivity.class);
         intent.putExtra("email", getArguments().getString("email"));
-        intent.putExtra("admin", admin.intValue());
+        intent.putExtra("admin", isAdmin);
         intent.putExtra("cc", eventDetails.getCC());
         intent.putExtra("eventid", eventDetails.getEventid());
         startActivityForResult(intent, EVENT_DETAILS);

@@ -49,64 +49,28 @@ public class MainFragment extends Fragment {
 
     // Firebase stuff.
     private FirebaseFirestore mDatabase;
-    private Map<String, Object> userDetails;
+
+    // Info loaded from MainActivity
+    private String email;
+    private String cc;
+    private boolean isAdmin;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         mDatabase = FirebaseFirestore.getInstance();
-        String email = getArguments().getString("email");
-        DocumentReference docRef = mDatabase.collection("users").document(email);
-        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot document = task.getResult();
-                    if (document.exists()) {
-                        // successfully loaded user info from database
-                        userDetails = document.getData();
-                        loadMyEvents(); // only load events after getting the user's CC
+        email = getArguments().getString("email");
+        cc = getArguments().getString("cc");
+        isAdmin = getArguments().getBoolean("isAdmin");
 
-                        final String userCC = (String) userDetails.get("cc");
-                        // update CC banner
-                        switch (userCC) {
-                            case "Computing CC":
-                                mCCBanner.setImageResource(R.drawable.cc_banner_computing);
-                                break;
-                            case "Business CC":
-                                mCCBanner.setImageResource(R.drawable.cc_banner_business);
-                                break;
-                            default:
-                                mCCBanner.setImageResource(R.drawable.cc_banner_senja);
-                        }
-
-                        // allow clicking on the banner
-                        mCCBanner.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                Intent intent = new Intent(getActivity(), CCInfoActivity.class);
-                                intent.putExtra("cc", userCC);
-                                startActivity(intent);
-                            }
-                        });
-
-                        Log.d("TNAP", "User data retrieved from Firestore");
-                    } else {
-                        Log.d("TNAP", "No such user");
-                    }
-                } else {
-                    Log.d("TNAP", "Failed to retrieve user with error: ", task.getException());
-                }
-            }
-        });
+        loadMyEvents();
     }
 
     /**
      * Load the latest 3 events (by eventid).
      */
     public void loadMyEvents() {
-        Query mMyEventsQuery = mDatabase.collection("rsvps").whereEqualTo("email", getArguments().getString("email"))
+        Query mMyEventsQuery = mDatabase.collection("rsvps").whereEqualTo("email", email)
                 .orderBy("eventid", Query.Direction.DESCENDING)
                 .limit(3);
         mMyEventsQuery.get()
@@ -127,10 +91,9 @@ public class MainFragment extends Fragment {
      * @param query The 3 events loaded from Firestore.
      */
     public void updateMyEvents(QuerySnapshot query) {
-        String cc = (String) userDetails.get("cc") + " ";
         CollectionReference allEvents = mDatabase.collection("events");
         for (QueryDocumentSnapshot document : query) {
-            allEvents.document(cc + document.getData().get("eventid")).get()
+            allEvents.document(cc + " " + document.getData().get("eventid")).get()
                     .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                         @Override
                         public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -159,14 +122,14 @@ public class MainFragment extends Fragment {
     public void showMyEvent(Event event) { // hardcoded
 
         if (eventNum == 1) {
-            mEventsOne.setText(event.getDescription()); // TODO: add onClickListener
+            mEventsOne.setText(event.getName()); // TODO: add onClickListener
 
         } else if (eventNum == 2) {
-            mEventsTwo.setText(event.getDescription());
+            mEventsTwo.setText(event.getName());
             mEventsTwo.setVisibility(View.VISIBLE);
 
         } else {
-            mEventsThree.setText(event.getDescription());
+            mEventsThree.setText(event.getName());
             mEventsThree.setVisibility(View.VISIBLE);
         }
         eventNum++;
@@ -186,6 +149,27 @@ public class MainFragment extends Fragment {
         mEventsTwo.setVisibility(View.GONE);
         mEventsThree.setVisibility(View.GONE);
 
+        switch (cc) {
+            case "Computing CC":
+                mCCBanner.setImageResource(R.drawable.cc_banner_computing);
+                break;
+            case "Business CC":
+                mCCBanner.setImageResource(R.drawable.cc_banner_business);
+                break;
+            default:
+                mCCBanner.setImageResource(R.drawable.cc_banner_senja);
+        }
+
+        // allow clicking on the banner
+        mCCBanner.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), CCInfoActivity.class);
+                intent.putExtra("cc", cc);
+                startActivity(intent);
+            }
+        });
+
         // TODO: add "See More" text for the events button; main screen only shows 3 events at most
         mEventsButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -197,7 +181,7 @@ public class MainFragment extends Fragment {
                 fragmentTransaction.replace(R.id.fragment_container, eventFrag).addToBackStack(null).commit();
 
                 navigationView = getActivity().findViewById(R.id.navigation);
-                navigationView.getMenu().getItem(1).setChecked(true); // TODO: change index after removing Requests completely
+                navigationView.getMenu().getItem(1).setChecked(true);
             }
         });
 

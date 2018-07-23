@@ -75,7 +75,7 @@ public class ShowEventActivity extends AppCompatActivity {
         email = getIntent().getStringExtra("email");
         cc = getIntent().getStringExtra("cc");
         eventid = getIntent().getIntExtra("eventid", 0);
-        isAdmin = getIntent().getIntExtra("admin", 0) == 1;
+        isAdmin = getIntent().getBooleanExtra("admin", false);
 
         DocumentReference docRef = mDatabase.collection("events").document(cc + " " + eventid);
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {

@@ -36,8 +36,8 @@
         android:layout_marginBottom="25dp"
         android:background="@color/primary"
         android:text="@string/action_add_event"
-        android:textColor="@color/icons"
-        android:visibility="gone" />
+        android:visibility="gone"
+        android:textColor="@color/icons" />
 
     <TextView
         android:layout_width="match_parent"
@@ -56,8 +56,8 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:overScrollMode="never"
-        app:layout_constraintTop_toBottomOf="@id/add_event_button"
         android:id="@+id/rv_events"
+        app:layout_constraintTop_toBottomOf="@id/add_event_button"
         />
 
 </android.support.constraint.ConstraintLayout>
