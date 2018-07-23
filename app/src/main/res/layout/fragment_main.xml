@@ -54,7 +54,7 @@
                 android:gravity="left|center_vertical"
                 android:paddingLeft="15dp"
                 android:paddingTop="10dp"
-                android:text="@string/title_events"
+                android:text="@string/title_my_events"
                 android:textColor="@color/black"
                 android:textSize="35sp"
                 android:textStyle="bold"

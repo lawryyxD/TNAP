@@ -18,6 +18,7 @@
     <string name="title_register">Register</string>
     <string name="title_home">Home</string>
     <string name="title_events">Events</string>
+    <string name="title_my_events">My Events</string>
     <string name="title_requests">Requests</string>
     <string name="title_profile">Profile</string>
     <string name="title_cc_profile">Community Club Profile</string>
