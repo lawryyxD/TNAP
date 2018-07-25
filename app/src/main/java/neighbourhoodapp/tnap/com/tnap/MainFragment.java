@@ -46,6 +46,7 @@ public class MainFragment extends Fragment {
     private TextView mEventsTwo;
     private TextView mEventsThree;
     private Button mEventsButton;
+    private Button mSeeMore;
     private BottomNavigationView navigationView;
 
     private int eventNum = 1; // counter to increment
@@ -186,6 +187,7 @@ public class MainFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_main, container, false);
         mEventsButton = view.findViewById(R.id.main_events_button);
+        mSeeMore = view.findViewById(R.id.see_more);
         mCCBanner = (ImageView) view.findViewById(R.id.cc_banner);
         mEventsOne = (TextView) view.findViewById(R.id.my_events_1);
         mEventsTwo = (TextView) view.findViewById(R.id.my_events_2);
@@ -218,6 +220,20 @@ public class MainFragment extends Fragment {
 
         // TODO: add "See More" text for the events button; main screen only shows 3 events at most
         mEventsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                EventsFragment eventFrag = new EventsFragment();
+                eventFrag.setArguments(getArguments());
+                fragmentTransaction.replace(R.id.fragment_container, eventFrag).addToBackStack(null).commit();
+
+                navigationView = getActivity().findViewById(R.id.navigation);
+                navigationView.getMenu().getItem(1).setChecked(true);
+            }
+        });
+
+        mSeeMore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 FragmentManager fragmentManager = getFragmentManager();

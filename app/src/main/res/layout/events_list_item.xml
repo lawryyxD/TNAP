@@ -25,6 +25,17 @@
         android:layout_marginTop="10dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
+        android:id="@+id/title_event_start_date"
+        android:text="@string/title_event_start_date"
+        android:textSize="15sp"
+        android:textColor="@color/accent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         android:id="@+id/list_event_item_startdate"
         android:textSize="15sp"
         android:textColor="@color/accent"
