@@ -14,9 +14,8 @@
         android:layout_marginEnd="20dp"
         android:id="@+id/list_rsvp_email"
         android:textSize="20sp"
-        android:textColor="@color/white"
-        android:background="@color/instagram_blue"
-        android:padding="15dp"
+        android:textColor="@color/gray_buttons"
+        android:padding="10dp"
         tools:text="Event" />
 
 </LinearLayout>

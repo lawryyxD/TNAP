@@ -75,10 +75,12 @@
 
             <TextView
                 android:id="@+id/show_event_capacity"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:textColor="@color/dark_gray"
+                android:padding="5dp"
+                android:textColor="@color/white"
+                android:background="@color/accent"
                 android:textIsSelectable="false"
                 android:textSize="20sp" />
 

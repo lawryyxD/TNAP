@@ -10,23 +10,24 @@
     <TextView
         android:id="@+id/title_bar"
         android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:background="@color/instagram_blue"
+        android:layout_height="wrap_content"
+        android:paddingTop="30dp"
 
         android:gravity="center"
-        android:textColor="@color/icons"
-        android:textSize="15sp"
-        android:textStyle="bold"
+        android:textColor="@color/gray_buttons"
+        android:textSize="45sp"
         app:layout_constraintTop_toTopOf="parent"
+        tools:text="Event Name"
         />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:layout_marginTop="55dp"
         android:layout_marginEnd="25dp"
         android:layout_marginStart="25dp"
-        android:textSize="30sp"
+        android:textSize="15sp"
         android:textColor="@color/black"
         android:text="No RSVPs Found"
         app:layout_constraintTop_toBottomOf="@id/title_bar"

@@ -67,7 +67,7 @@
                 android:layout_marginEnd="20dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
-                android:background="@color/instagram_blue"
+                android:background="@color/gray_buttons"
 
                 android:padding="15dp"
 
@@ -84,7 +84,7 @@
                 android:layout_marginEnd="20dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="30dp"
-                android:background="@color/instagram_blue"
+                android:background="@color/gray_buttons"
 
                 android:padding="15dp"
 
@@ -101,7 +101,7 @@
                 android:layout_marginEnd="20dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="30dp"
-                android:background="@color/instagram_blue"
+                android:background="@color/gray_buttons"
 
                 android:padding="15dp"
 

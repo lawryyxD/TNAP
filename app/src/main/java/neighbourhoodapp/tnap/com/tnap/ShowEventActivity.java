@@ -1,6 +1,7 @@
 package neighbourhoodapp.tnap.com.tnap;
 
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
@@ -244,6 +245,7 @@ public class ShowEventActivity extends AppCompatActivity {
         mDescView.setText(eventDetails.getDescription());
         mVenueView.setText(eventDetails.getVenue());
         mCapacityView.setText(capacityText);
+        mCapacityView.setPaintFlags(mCapacityView.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
 
         mRegisterByView.setText(new SimpleDateFormat(
                 "dd/MM/yyyy hh:mm a", Locale.US).format(eventDetails.getRegisterby()));
