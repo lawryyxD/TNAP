@@ -14,7 +14,6 @@
         android:overScrollMode="never"
         android:paddingBottom="80dp"
         android:paddingTop="25dp"
-        android:scrollbars="none"
         app:layout_constraintBottom_toTopOf="@id/register_sign_up_button"
         app:layout_constraintTop_toTopOf="parent">
 
