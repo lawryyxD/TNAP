@@ -36,6 +36,7 @@ public class ProfileFragment extends Fragment {
     private TextView mProfileEmail;
     private TextView mProfileAddress;
     private Button mEditProfileButton;
+    private Button mLogoutButton;
 
     // Firebase stuff.
     private FirebaseFirestore mDatabase;
@@ -87,6 +88,15 @@ public class ProfileFragment extends Fragment {
                 startActivityForResult(intent, REQUEST_EDIT);
             }
         });
+
+        mLogoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View abc) {
+                Intent intent = new Intent(getActivity(), LoginActivity.class);
+                getActivity().finish();
+                startActivity(intent);
+            }
+        });
     }
 
     private void loadUserView() {
@@ -122,6 +132,15 @@ public class ProfileFragment extends Fragment {
                 startActivityForResult(intent, REQUEST_EDIT);
             }
         });
+
+        mLogoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View abc) {
+                Intent intent = new Intent(getActivity(), LoginActivity.class);
+                getActivity().finish();
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -134,6 +153,7 @@ public class ProfileFragment extends Fragment {
         mProfileEmail = (TextView) view.findViewById(R.id.profile_email);
         mProfileAddress = (TextView) view.findViewById(R.id.profile_address);
         mEditProfileButton = view.findViewById(R.id.edit_profile_button);
+        mLogoutButton = view.findViewById(R.id.logout_button);
 
         if (isAdmin) {
             loadAdminView();

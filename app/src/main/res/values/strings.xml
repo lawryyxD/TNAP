@@ -44,6 +44,7 @@
     <string name="edit_cc_profile">Edit CC Profile</string>
     <string name="search_bar_text">Search</string>
     <string name="button_see_all">See All ></string>
+    <string name="button_logout">Logout</string>
 
     <string name="action_save_profile">Save Profile</string>
     <string name="action_save_cc_info">Save CC Info</string>
