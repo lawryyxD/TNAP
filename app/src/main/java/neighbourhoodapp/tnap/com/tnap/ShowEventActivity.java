@@ -104,7 +104,7 @@ public class ShowEventActivity extends AppCompatActivity {
         });
 
         if (isAdmin) {
-            mEventActionButton.setText("Edit Event"); // TODO: use R.strings
+            mEventActionButton.setText(getResources().getString(R.string.edit_event)); // TODO: use R.strings
             mEventActionButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -130,11 +130,11 @@ public class ShowEventActivity extends AppCompatActivity {
                         QuerySnapshot result = task.getResult();
                         if (result.isEmpty()) { // not attending
                             isAttending = false;
-                            mEventActionButton.setText("RSVP"); // TODO: use R.strings
+                            mEventActionButton.setText(getResources().getString(R.string.button_RSVP)); // TODO: use R.strings
                         } else {
                             isAttending = true;
                             rsvpId = result.getDocuments().get(0).getId();
-                            mEventActionButton.setText("Cancel RSVP"); // TODO: use R.strings
+                            mEventActionButton.setText(getResources().getString(R.string.button_cancel_RSVP)); // TODO: use R.strings
                         }
                         mEventActionButton.setOnClickListener(new View.OnClickListener() {
                             @Override

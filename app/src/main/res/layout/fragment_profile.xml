@@ -36,7 +36,7 @@
                 <ImageView
                     android:id="@+id/imageView"
                     android:layout_width="match_parent"
-                    android:layout_height="225dp"
+                    android:layout_height="200dp"
                     android:scaleType="fitXY"
                     android:src="@drawable/cover_photo"
                     app:layout_constraintTop_toTopOf="parent"
@@ -48,7 +48,7 @@
                     android:id="@+id/profile_picture_placeholder"
                     android:layout_width="225dp"
                     android:layout_height="225dp"
-                    android:layout_marginTop="75dp"
+                    android:layout_marginTop="50dp"
 
                     android:src="@drawable/profile_picture_placeholder"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -112,7 +112,14 @@
                     android:id="@+id/edit_profile_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:paddingStart="15dp"
+                    android:paddingEnd="15dp"
+                    android:layout_marginTop="15dp"
                     android:layout_marginBottom="15dp"
+                    android:background="@color/icons"
+                    android:textColor="@color/gray_buttons"
 
                     android:text="@string/edit_profile"
                     app:layout_constraintBottom_toTopOf="@id/logout_button"
@@ -122,14 +129,12 @@
 
                 <Button
                     android:id="@+id/logout_button"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
                     android:layout_marginBottom="25dp"
                     android:layout_marginStart="40dp"
                     android:layout_marginEnd="40dp"
-
-                    android:background="@color/gray_buttons"
 
                     android:text="@string/button_logout"
                     android:textColor="@color/white"

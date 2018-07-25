@@ -42,9 +42,12 @@
 
     <string name="edit_profile">Edit Profile</string>
     <string name="edit_cc_profile">Edit CC Profile</string>
+    <string name="edit_event">Edit Event</string>
     <string name="search_bar_text">Search</string>
     <string name="button_see_all">See All ></string>
     <string name="button_logout">Logout</string>
+    <string name="button_RSVP">RSVP</string>
+    <string name="button_cancel_RSVP">Cancel RSVP</string>
 
     <string name="action_save_profile">Save Profile</string>
     <string name="action_save_cc_info">Save CC Info</string>
