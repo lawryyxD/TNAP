@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/icons"
     tools:context=".EditProfileActivity">
 
     <ScrollView
@@ -47,28 +48,37 @@
 
             </android.support.design.widget.TextInputLayout>
 
-            <android.support.design.widget.TextInputLayout
+            <!--<android.support.design.widget.TextInputLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_marginLeft="25dp"-->
+                <!--android:layout_marginRight="25dp"-->
+                <!--android:textColorHint="@color/accent">-->
+
+                <!--<AutoCompleteTextView-->
+                    <!--android:id="@+id/update_gender"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:hint="@string/prompt_gender"-->
+                    <!--android:imeOptions="actionNext"-->
+                    <!--android:inputType="textNoSuggestions"-->
+                    <!--android:maxLines="1"-->
+                    <!--android:textColor="@color/primary_text"-->
+                    <!--android:textColorHint="@color/accent"-->
+                    <!--android:textIsSelectable="false"-->
+                    <!--android:textSize="25sp"-->
+                    <!--android:textStyle="bold" />-->
+
+            <!--</android.support.design.widget.TextInputLayout>-->
+
+            <Spinner
+                android:id="@+id/gender_dropdown"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="25dp"
-                android:layout_marginRight="25dp"
-                android:textColorHint="@color/accent">
-
-                <AutoCompleteTextView
-                    android:id="@+id/update_gender"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/prompt_gender"
-                    android:imeOptions="actionNext"
-                    android:inputType="textNoSuggestions"
-                    android:maxLines="1"
-                    android:textColor="@color/primary_text"
-                    android:textColorHint="@color/accent"
-                    android:textIsSelectable="false"
-                    android:textSize="25sp"
-                    android:textStyle="bold" />
-
-            </android.support.design.widget.TextInputLayout>
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="25dp"
+                android:layout_marginStart="23dp"
+                android:layout_marginTop="8dp"
+                android:spinnerMode="dropdown" />
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
@@ -139,28 +149,38 @@
                     android:textStyle="bold" />
 
             </android.support.design.widget.TextInputLayout>
-            <android.support.design.widget.TextInputLayout
+            <!--<android.support.design.widget.TextInputLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_marginLeft="25dp"-->
+                <!--android:layout_marginRight="25dp"-->
+                <!--android:textColorHint="@color/accent">-->
+
+                <!--<AutoCompleteTextView-->
+                    <!--android:id="@+id/update_cc"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:hint="@string/prompt_cc"-->
+                    <!--android:imeOptions="actionNext"-->
+                    <!--android:inputType="textNoSuggestions"-->
+                    <!--android:maxLines="1"-->
+                    <!--android:textColor="@color/primary_text"-->
+                    <!--android:textColorHint="@color/accent"-->
+                    <!--android:textIsSelectable="false"-->
+                    <!--android:textSize="25sp"-->
+                    <!--android:textStyle="bold" />-->
+
+            <!--</android.support.design.widget.TextInputLayout>-->
+
+            <Spinner
+                android:id="@+id/cc_dropdown"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="25dp"
-                android:layout_marginRight="25dp"
-                android:textColorHint="@color/accent">
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="25dp"
+                android:layout_marginStart="23dp"
+                android:layout_marginTop="8dp"
+                android:spinnerMode="dropdown" />
 
-                <AutoCompleteTextView
-                    android:id="@+id/update_cc"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/prompt_cc"
-                    android:imeOptions="actionNext"
-                    android:inputType="textNoSuggestions"
-                    android:maxLines="1"
-                    android:textColor="@color/primary_text"
-                    android:textColorHint="@color/accent"
-                    android:textIsSelectable="false"
-                    android:textSize="25sp"
-                    android:textStyle="bold" />
-
-            </android.support.design.widget.TextInputLayout>
         </LinearLayout>
 
     </ScrollView>

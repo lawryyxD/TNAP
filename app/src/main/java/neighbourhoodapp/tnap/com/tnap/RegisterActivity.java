@@ -48,7 +48,7 @@ public class RegisterActivity extends AppCompatActivity implements OnItemSelecte
     private AutoCompleteTextView mBirthdateView;
     private AutoCompleteTextView mPhoneNumView;
     private AutoCompleteTextView mAddressView;
-    private AutoCompleteTextView mCCView;
+    //private AutoCompleteTextView mCCView;
 
     private Spinner mGenderSpinner;
     private Spinner mCCSpinner;

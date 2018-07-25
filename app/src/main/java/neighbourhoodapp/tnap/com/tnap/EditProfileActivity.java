@@ -8,7 +8,10 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,6 +36,9 @@ public class EditProfileActivity extends AppCompatActivity {
     private AutoCompleteTextView mAddressView;
     private AutoCompleteTextView mCCView;
 
+    private Spinner mGenderSpinner;
+    private Spinner mCCSpinner;
+
     private String email;
 
     // Firebase stuff.
@@ -45,11 +51,11 @@ public class EditProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit_profile);
 
         mUsernameView = (AutoCompleteTextView) findViewById(R.id.update_username);
-        mGenderView = (AutoCompleteTextView) findViewById(R.id.update_gender);
+        //mGenderView = (AutoCompleteTextView) findViewById(R.id.update_gender);
         mBirthdateView = (AutoCompleteTextView) findViewById(R.id.update_birthday);
         mPhoneNumView = (AutoCompleteTextView) findViewById(R.id.update_phone);
         mAddressView = (AutoCompleteTextView) findViewById(R.id.update_address);
-        mCCView = (AutoCompleteTextView) findViewById(R.id.update_cc);
+        //mCCView = (AutoCompleteTextView) findViewById(R.id.update_cc);
 
         mDatabase = FirebaseFirestore.getInstance();
         email = getIntent().getStringExtra("email");
@@ -65,11 +71,11 @@ public class EditProfileActivity extends AppCompatActivity {
 
                         // Populate the page with details
                         mUsernameView.setText((String) userDetails.get("username"));
-                        mGenderView.setText((String) userDetails.get("gender"));
+                        //mGenderView.setText((String) userDetails.get("gender"));
                         mBirthdateView.setText((String) userDetails.get("birthdate"));
                         mPhoneNumView.setText((String) userDetails.get("phone"));
                         mAddressView.setText((String) userDetails.get("address"));
-                        mCCView.setText((String) userDetails.get("cc"));
+                        //mCCView.setText((String) userDetails.get("cc"));
 
                         Log.d("TNAP", "User data retrieved from Firestore");
                     } else {
@@ -80,6 +86,16 @@ public class EditProfileActivity extends AppCompatActivity {
                 }
             }
         });
+
+        mCCSpinner = findViewById(R.id.cc_dropdown);
+        ArrayAdapter<CharSequence> communitycentre_adapter = ArrayAdapter.createFromResource(this, R.array.cc_array, R.layout.spinner_item);
+        communitycentre_adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
+        mCCSpinner.setAdapter(communitycentre_adapter);
+
+        mGenderSpinner = findViewById(R.id.gender_dropdown);
+        ArrayAdapter<CharSequence> gender_adapter = ArrayAdapter.createFromResource(this, R.array.gender_array, R.layout.spinner_item);
+        gender_adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
+        mGenderSpinner.setAdapter(gender_adapter);
     }
 
     // Executed when Save Profile button is pressed.
@@ -90,11 +106,13 @@ public class EditProfileActivity extends AppCompatActivity {
     private void attemptSaving() {
 
         String username = mUsernameView.getText().toString();
-        String gender = mGenderView.getText().toString();
         String birthdate = mBirthdateView.getText().toString();
         String phone = mPhoneNumView.getText().toString();
         String address = mAddressView.getText().toString();
-        String cc = mCCView.getText().toString();
+        String gender = mGenderSpinner.getSelectedItem().toString();
+        String cc = mCCSpinner.getSelectedItem().toString();
+        //String gender = mGenderView.getText().toString();
+        //String cc = mCCView.getText().toString();
 
         DocumentReference userRef = mDatabase.collection("users").document(email);
 
@@ -126,7 +144,7 @@ public class EditProfileActivity extends AppCompatActivity {
         // Activity finished ok, return the data with result code
         setResult(20, data);
         finish();
-        Toast.makeText(this, "Profile saved.", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Profile saved. Please restart the app to apply changes.", Toast.LENGTH_SHORT).show();
     }
 
     @Override
