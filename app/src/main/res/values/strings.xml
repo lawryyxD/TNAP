@@ -24,6 +24,7 @@
     <string name="title_cc_profile">Community Club Profile</string>
     <string name="title_add_event">Add Event</string>
     <string name="title_show_event">Event Details</string>
+    <string name="title_show_rsvp">RSVP Details</string>
 
     <string name="prompt_nric">NRIC</string>
     <string name="prompt_gender">Gender</string>

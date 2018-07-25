@@ -105,6 +105,16 @@
                 android:value="neighbourhoodapp.tnap.com.tnap.ShowEventActivity" />
         </activity>
 
+        <activity
+            android:name=".RSVPActivity"
+            android:label="@string/title_show_rsvp"
+            android:parentActivityName=".ShowEventActivity"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="neighbourhoodapp.tnap.com.tnap.ShowEventActivity" />
+        </activity>
+
     </application>
 
 </manifest>
