@@ -24,10 +24,12 @@
 
         <activity
             android:name=".LoginActivity"
+            android:windowSoftInputMode="adjustResize"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".RegisterActivity"
             android:label="@string/title_register"
+            android:windowSoftInputMode="adjustResize"
             android:parentActivityName=".LoginActivity"
             android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
             <meta-data
@@ -43,6 +45,7 @@
         <activity
             android:name=".EditProfileActivity"
             android:label="@string/edit_profile"
+            android:windowSoftInputMode="adjustResize"
             android:parentActivityName=".MainActivity"
             android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
         <meta-data
@@ -53,6 +56,7 @@
         <activity
             android:name=".EditCCInfoActivity"
             android:label="@string/edit_cc_profile"
+            android:windowSoftInputMode="adjustResize"
             android:parentActivityName=".MainActivity"
             android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
             <meta-data
@@ -93,6 +97,7 @@
         <activity
             android:name=".EditEventActivity"
             android:label="@string/title_show_event"
+            android:windowSoftInputMode="adjustResize"
             android:parentActivityName=".ShowEventActivity"
             android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
             <meta-data

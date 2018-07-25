@@ -49,6 +49,9 @@ public class RegisterActivity extends AppCompatActivity implements OnItemSelecte
     private AutoCompleteTextView mAddressView;
     private AutoCompleteTextView mCCView;
 
+    private Spinner mGenderSpinner;
+    private Spinner mCCSpinner;
+
     // Firebase instance variables
     private FirebaseAuth mAuth;
     private FirebaseFirestore mDatabase;
@@ -64,11 +67,13 @@ public class RegisterActivity extends AppCompatActivity implements OnItemSelecte
 
         mUsernameView = (AutoCompleteTextView) findViewById(R.id.register_username);
         mNRICView = (AutoCompleteTextView) findViewById(R.id.register_nric);
-        mGenderView = (AutoCompleteTextView) findViewById(R.id.register_gender);
         mBirthdateView = (AutoCompleteTextView) findViewById(R.id.register_birthday);
         mPhoneNumView = (AutoCompleteTextView) findViewById(R.id.register_phone);
         mAddressView = (AutoCompleteTextView) findViewById(R.id.register_address);
-        mCCView = (AutoCompleteTextView) findViewById(R.id.register_cc);
+
+        //OLD Values
+        //mGenderView = (AutoCompleteTextView) findViewById(R.id.register_gender);
+        //mCCView = (AutoCompleteTextView) findViewById(R.id.register_cc);
 
         // Keyboard sign in action
         mConfirmPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -88,19 +93,19 @@ public class RegisterActivity extends AppCompatActivity implements OnItemSelecte
 
         // Initiate drop-down menus
         // Gender drop-down spinner
-        Spinner gender = findViewById(R.id.gender_dropdown);
+        mGenderSpinner = findViewById(R.id.gender_dropdown);
         ArrayAdapter<CharSequence> gender_adapter = ArrayAdapter.createFromResource(this, R.array.gender_array, R.layout.spinner_item);
         gender_adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
-        gender.setAdapter(gender_adapter);
-        gender.setOnItemSelectedListener(this);
+        mGenderSpinner.setAdapter(gender_adapter);
+        mGenderSpinner.setOnItemSelectedListener(this);
 
         // Initiate drop-down menus
         // Community Centre drop-down
-        Spinner communitycentre = findViewById(R.id.cc_dropdown);
+        mCCSpinner = findViewById(R.id.cc_dropdown);
         ArrayAdapter<CharSequence> communitycentre_adapter = ArrayAdapter.createFromResource(this, R.array.cc_array, R.layout.spinner_item);
         communitycentre_adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
-        communitycentre.setAdapter(communitycentre_adapter);
-        communitycentre.setOnItemSelectedListener(this);
+        mCCSpinner.setAdapter(communitycentre_adapter);
+        mCCSpinner.setOnItemSelectedListener(this);
 
     }
 
@@ -187,11 +192,15 @@ public class RegisterActivity extends AppCompatActivity implements OnItemSelecte
         String email = mEmailView.getText().toString();
         String username = mUsernameView.getText().toString();
         String nric = mNRICView.getText().toString();
-        String gender = mGenderView.getText().toString();
+        String gender = mGenderSpinner.getSelectedItem().toString();
         String birthdate = mBirthdateView.getText().toString();
         String phone = mPhoneNumView.getText().toString();
         String address = mAddressView.getText().toString();
-        String cc = mCCView.getText().toString();
+        String cc = mCCSpinner.getSelectedItem().toString();
+
+        //OLD Values
+        //String cc = mCCView.getText().toString();
+        //String gender = mGenderView.getText().toString();
 
         Map<String, Object> newUser = new HashMap<>();
         newUser.put("email", email);

@@ -69,8 +69,8 @@
     <string-array name="cc_array">
         <item>Community Centre</item>
         <item>Senja-Cashew CC</item>
-        <item>NUS Computing</item>
-        <item>NUS Business</item>
+        <item>Computing CC</item>
+        <item>Business CC</item>
     </string-array>
 
     <string name="hello_main_fragment">Loading your CC...</string>
