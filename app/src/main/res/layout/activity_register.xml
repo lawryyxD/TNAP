@@ -42,8 +42,7 @@
                     android:textColor="@color/primary_text"
                     android:textColorHint="@color/accent"
                     android:textIsSelectable="false"
-                    android:textSize="25sp"
-                    android:textStyle="bold" />
+                    android:textSize="20sp" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -66,8 +65,7 @@
                     android:textColor="@color/primary_text"
                     android:textColorHint="@color/accent"
                     android:textIsSelectable="false"
-                    android:textSize="25sp"
-                    android:textStyle="bold" />
+                    android:textSize="20sp" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -88,8 +86,7 @@
                     android:maxLines="1"
                     android:textColor="@color/primary_text"
                     android:textColorHint="@color/accent"
-                    android:textSize="25sp"
-                    android:textStyle="bold" />
+                    android:textSize="20sp" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -112,8 +109,7 @@
                     android:maxLines="1"
                     android:textColor="@color/primary_text"
                     android:textColorHint="@color/accent"
-                    android:textSize="25sp"
-                    android:textStyle="bold" />
+                    android:textSize="20sp" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -135,8 +131,7 @@
                     android:textColor="@color/primary_text"
                     android:textColorHint="@color/accent"
                     android:textIsSelectable="false"
-                    android:textSize="25sp"
-                    android:textStyle="bold" />
+                    android:textSize="20sp" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -190,8 +185,7 @@
                     android:textColor="@color/primary_text"
                     android:textColorHint="@color/accent"
                     android:textIsSelectable="false"
-                    android:textSize="25sp"
-                    android:textStyle="bold" />
+                    android:textSize="20sp" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -208,13 +202,13 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/prompt_phone"
                     android:imeOptions="actionNext"
-                    android:inputType="textNoSuggestions"
+                    android:inputType="phone"
+                    android:digits="0123456789"
                     android:maxLines="1"
                     android:textColor="@color/primary_text"
                     android:textColorHint="@color/accent"
                     android:textIsSelectable="false"
-                    android:textSize="25sp"
-                    android:textStyle="bold" />
+                    android:textSize="20sp" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -236,8 +230,7 @@
                     android:textColor="@color/primary_text"
                     android:textColorHint="@color/accent"
                     android:textIsSelectable="false"
-                    android:textSize="25sp"
-                    android:textStyle="bold" />
+                    android:textSize="20sp" />
 
             </android.support.design.widget.TextInputLayout>
 

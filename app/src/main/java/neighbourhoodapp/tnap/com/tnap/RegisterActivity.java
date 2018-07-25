@@ -3,6 +3,7 @@ package neighbourhoodapp.tnap.com.tnap;
 import android.app.ActionBar;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AlertDialog;
@@ -106,7 +107,6 @@ public class RegisterActivity extends AppCompatActivity implements OnItemSelecte
         communitycentre_adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
         mCCSpinner.setAdapter(communitycentre_adapter);
         mCCSpinner.setOnItemSelectedListener(this);
-
     }
 
     // Executed when Sign Up button is pressed.

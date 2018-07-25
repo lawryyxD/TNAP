@@ -4,9 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="40dp"
     android:background="@drawable/background_dropdown"
-    android:textSize="25sp"
+    android:textSize="20sp"
     android:gravity="left|bottom|clip_vertical"
     android:textColor="@color/accent"
     android:padding="5dip"
-    android:textStyle="bold"
     />

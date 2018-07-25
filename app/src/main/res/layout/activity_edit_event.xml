@@ -99,14 +99,14 @@
                 android:layout_marginRight="25dp"
                 android:textColorHint="@color/accent">
 
-                <!-- TODO: set Number keyboard -->
                 <AutoCompleteTextView
                     android:id="@+id/edit_event_capacity"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/prompt_event_capacity"
                     android:imeOptions="actionNext"
-                    android:inputType="textNoSuggestions"
+                    android:inputType="phone"
+                    android:digits="0123456789"
                     android:maxLines="1"
                     android:textColor="@color/primary_text"
                     android:textColorHint="@color/accent"

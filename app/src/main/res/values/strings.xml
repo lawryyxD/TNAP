@@ -33,9 +33,10 @@
     <string name="prompt_address">Home Address</string>
     <string name="prompt_cc">Community Centre</string>
 
-    <string name="prompt_cc_address">CC Address</string>
+    <string name="prompt_cc_address">Address</string>
     <string name="prompt_cc_hours">Opening Hours</string>
     <string name="prompt_cc_writeup">Writeup</string>
+    <string name="prompt_cc_description">Description</string>
     <string name="prompt_cc_phone">Phone Number</string>
 
     <string name="edit_profile">Edit Profile</string>
