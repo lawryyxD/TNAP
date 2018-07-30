@@ -92,8 +92,9 @@ public class RSVPActivity extends AppCompatActivity
     @Override
     public void onRSVPItemClick(DocumentSnapshot rsvp) {
         // rsvp.getData() returns a Map<String, Object> of the RSVP details
-        String toastMessage = rsvp.getId();
-        Toast.makeText(this, toastMessage, Toast.LENGTH_SHORT).show();
+        // TODO: open up Profile page
+        // String toastMessage = rsvp.getId();
+        // Toast.makeText(this, toastMessage, Toast.LENGTH_SHORT).show();
 
         /*
         Intent intent = new Intent(getActivity(), ShowEventActivity.class);
